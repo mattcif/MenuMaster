@@ -2,14 +2,24 @@ import React, { useState } from 'react';
 import { Card } from '../../components/card/card';
 import { useRecipeData } from '../../hooks/useRecipeData';
 import { CreateModal } from '../create-modal/createModal';
-import './recipeList.css'
+import { DeleteRecipe } from '../../components/delete-recipe/deleteRecipe';
+import './recipeList.css';
 
 export function RecipeList() {
   const { data } = useRecipeData();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedRecipeId, setSelectedRecipeId] = useState<string | null>(null);
 
   const handleOpenModal = () => {
     setIsModalOpen(prev => !prev);
+  };
+
+  const handleOpenDeleteModal = (recipeId: string) => {
+    setSelectedRecipeId(recipeId);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setSelectedRecipeId(null);
   };
 
   const truncateText = (text: string, maxLength: number) => {
@@ -30,10 +40,18 @@ export function RecipeList() {
             name={recipeData.name}
             preparationMethod={truncateText(recipeData.preparationMethod, 50)}
             image={recipeData.image}
-          />)}
+            onDelete={handleOpenDeleteModal} // Passa a função para abrir o modal de deleção
+          />
+        )}
       </div>
       {isModalOpen && <CreateModal closeModal={handleOpenModal} />}
-      <button className="newIngredientbtn" onClick={handleOpenModal}>novo</button>
+      {selectedRecipeId && (
+        <DeleteRecipe 
+          recipeId={selectedRecipeId} 
+          closeModal={handleCloseDeleteModal} 
+        />
+      )}
+      <button className="newIngredientbtn" onClick={handleOpenModal}>Novo</button>
     </div>
   );
 }

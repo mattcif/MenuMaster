@@ -38,4 +38,11 @@ public class RecipeController {
         Recipe recipeData = new Recipe(data);
         recipeRepository.save(recipeData);
     }
+
+    @DeleteMapping("/{id}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteRecipeById(@PathVariable UUID id) {
+        recipeRepository.deleteById(id);
+    }
 }

@@ -65,7 +65,7 @@ export function CreateModal({closeModal }: ModalProps ) {
                     <Input label="image" value={image} updateValue={setImage}/>
                     <InputIngredient ingredients={ingredients} setIngredients={setIngredients}/>
                 </form>
-                <button className="btn-secondery" type="button" onClick={submit}></button>
+                <button className="btn-secondery" type="button" onClick={submit}>Submit</button>
             </div>
         </div>
     )

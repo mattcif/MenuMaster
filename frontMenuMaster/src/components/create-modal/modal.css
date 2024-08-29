@@ -64,8 +64,22 @@
     transform: scale(1);
 }
 
-.modal-overlay .modal-body .modal-header button {
+.modal-overlay .modal-body .modal-header  {
+    width: 100%;
     display: inline-flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-around;
+
+}
+
+.modal-overlay .modal-body .modal-header h2 {
+    justify-content: start;
+    align-items: start;
+}
+
+.modal-overlay .modal-body .modal-header button {
+    padding: 24px;
+    background-color: transparent;
+    border: none;
+    color: red;
+
 }

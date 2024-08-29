@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Card } from '../../components/card/card';
 import { useRecipeData } from '../../hooks/useRecipeData';
 import { CreateModal } from '../create-modal/createModal';
-import { DeleteRecipe } from '../../components/delete-recipe/deleteRecipe';
+import { DeleteRecipe } from '../recipe-delete/deleteRecipe';
 import './recipeList.css';
 
 export function RecipeList() {

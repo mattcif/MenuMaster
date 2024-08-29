@@ -1,7 +1,7 @@
 import "./card.css"
 import { Ingredient } from "../../interface/Ingredient"
 import { useNavigate } from "react-router-dom"
-import { DeleteRecipe } from "../delete-recipe/deleteRecipe";
+import { DeleteRecipe } from "../recipe-delete/deleteRecipe";
 import { useState } from "react";
 
 interface CardProps {

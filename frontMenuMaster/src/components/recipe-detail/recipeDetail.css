@@ -1,0 +1,154 @@
+/* recipeDetail.css */
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.img-container  {
+    
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #4a90e2;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 1.8rem;
+    color: #4a90e2;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.ingredients-container {
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.ingredients-container ul {
+    list-style-type:none;
+    padding: 0;
+}
+
+.ingredients-container li {
+    font-size: 1.1rem;
+    padding: 5px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.ingredients-container li:last-child {
+    border-bottom: none;
+}
+
+.ingredients-container .add-ingredient button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    background-color: #7caf4c;
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;  
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    .ingredients-container li {
+        font-size: 1rem;
+    }
+}
+
+/* Estilo para o botão de edição no topo direito */
+.edit-save-button {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background-color: #4CAF50; /* Verde para "Salvar" */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.edit-save-button:hover {
+    background-color: #45a049; /* Tom mais escuro de verde no hover */
+}
+
+.edit-recipe-name,
+.edit-recipe-image,
+.edit-recipe-method {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.edit-recipe-name:focus,
+.edit-recipe-image:focus,
+.edit-recipe-method:focus {
+    border-color: #4a90e2; /* Muda a cor da borda ao focar */
+    outline: none; /* Remove o outline padrão */
+}
+
+.edit-recipe-method {
+    min-height: 100px; /* Altura mínima para o campo de texto */
+    resize: vertical; /* Permite redimensionamento vertical */
+}
+
+/* Ajustes para dispositivos móveis */
+@media (max-width: 600px) {
+    .edit-save-button {
+        top: 5px;
+        right: 10px;
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+
+    .edit-recipe-name,
+    .edit-recipe-image,
+    .edit-recipe-method {
+        font-size: 0.9rem;
+    }
+}
+
+
+

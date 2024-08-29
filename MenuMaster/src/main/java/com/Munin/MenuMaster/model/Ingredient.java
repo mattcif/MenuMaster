@@ -1,5 +1,6 @@
 package com.Munin.MenuMaster.model;
 
+import com.Munin.MenuMaster.requestDTO.IngredientRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,4 +25,10 @@ public class Ingredient {
 
     @Enumerated(EnumType.STRING)
     private TypeQuantity typeQuantity;
+
+    public Ingredient(IngredientRequestDto data) {
+        this.name = data.name();
+        this.quantity = data.quantity();
+        this.typeQuantity = data.typeQuantity();
+    }
 }

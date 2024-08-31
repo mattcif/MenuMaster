@@ -4,6 +4,8 @@ import { useRecipeData } from '../../hooks/useRecipeData';
 import { CreateModal } from '../create-modal/createModal';
 import { DeleteRecipe } from '../recipe-delete/deleteRecipe';
 import './recipeList.css';
+import RecipeCaledar from "../calendar/Calendar"
+
 
 export function RecipeList() {
   const { data } = useRecipeData();
@@ -31,6 +33,8 @@ export function RecipeList() {
 
   return (
     <div className="container">
+        <RecipeCaledar/>
+
       <h1>Receitas</h1>
       <div className='card-grid'>
         {data?.map(recipeData => 

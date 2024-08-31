@@ -1,3 +1,4 @@
+/* card.css */
 .card {
     display: flex;
     flex-direction: column;
@@ -7,6 +8,7 @@
     border-radius: 8px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     padding: 0;
+    position: relative;
 }
 
 .card img {
@@ -18,3 +20,36 @@
 .card-grid {
     text-decoration: none;
 }
+
+.calendar-container {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4); /* Fundo escurecido */
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.save-btn,
+.cancel-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.save-btn {
+    background-color: #4caf50;
+    color: white;
+}
+
+.cancel-btn {
+    background-color: #f44336; 
+    color: white;
+}
+

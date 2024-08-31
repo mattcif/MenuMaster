@@ -1,0 +1,11 @@
+.custom-event {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #FF7043;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 2px 0;
+    white-space: nowrap;
+  }
+

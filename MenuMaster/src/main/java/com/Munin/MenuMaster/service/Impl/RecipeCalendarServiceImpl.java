@@ -13,7 +13,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -60,5 +62,22 @@ public class RecipeCalendarServiceImpl implements RecipeCalendarService {
 
 
     }
+
+    @Override
+    @Transactional
+    public List<RecipeCalendarDTO> getAllRecipeCalendars() {
+        List<RecipeCalendar> recipeCalendars = recipeCalendarRepository.findAll();
+
+        return recipeCalendars.stream().map(recipeCalendar -> {
+            RecipeCalendarDTO dto = new RecipeCalendarDTO();
+            dto.setRecipeId(recipeCalendar.getRecipe().getId());
+            dto.setDates(
+                    List.of(recipeCalendar.getCalendar().getDate().toString())
+            ); // Convert LocalDate to String
+            dto.setQuantity(recipeCalendar.getQuantity());
+            return dto;
+        }).collect(Collectors.toList());
+    }
+
 }
 

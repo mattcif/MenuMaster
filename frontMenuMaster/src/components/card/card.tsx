@@ -53,7 +53,7 @@ export function Card({ id, name, preparationMethod, image, onDelete }: CardProps
             </div>
             {isCalendarVisible && (
                 <div className="calendar-container">
-                    <MiniCalendar closeCalendar={handleChooseDateClick} onDateSelect={handleDateSelect} recipeName={name} />
+                    <MiniCalendar closeCalendar={handleChooseDateClick} onDateSelect={handleDateSelect} recipeName={name} recipeId={id} />
                 </div>
             )}
         </div>

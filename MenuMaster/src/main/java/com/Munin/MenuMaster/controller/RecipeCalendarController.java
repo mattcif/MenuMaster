@@ -7,13 +7,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/menu-master/calendar")
 public class RecipeCalendarController {
 
-
     @Autowired
     private RecipeCalendarService recipeCalendarService;
+
+
+
     @PostMapping("/create")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @ResponseStatus(HttpStatus.CREATED)
@@ -23,6 +27,18 @@ public class RecipeCalendarController {
             return new ResponseEntity<>("RecipeCalendar created or updated successfully", HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>("Error processing recipe calendar: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    // Novo método GET para recuperar todos os RecipeCalendars
+    @GetMapping
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    public ResponseEntity<List<RecipeCalendarDTO>> getRecipeCalendars() {
+        try {
+            List<RecipeCalendarDTO> recipeCalendars = recipeCalendarService.getAllRecipeCalendars();
+            return ResponseEntity.ok(recipeCalendars);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(null);
         }
     }
 }

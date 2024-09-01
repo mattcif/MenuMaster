@@ -1,26 +1,41 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DatePicker, { DateObject } from 'react-multi-date-picker';
 import './mini-calendar.css'; // Inclua o arquivo CSS para estilização
+import { RecipeDate } from '../../interface/RecipeDate';
+import { useRecipeCalendarMutate } from '../../hooks/useRecipeCalendarMutate';
 
 interface MiniCalendarProps {
   onDateSelect: (date: Date) => void;
+  recipeId: string;
   recipeName: string;
   closeCalendar(): void
 }
 
-export const MiniCalendar: React.FC<MiniCalendarProps> = ({ onDateSelect, recipeName, closeCalendar }) => {
+export const MiniCalendar: React.FC<MiniCalendarProps> = ({ onDateSelect, recipeId, recipeName, closeCalendar }) => {
   const [selectedDates, setSelectedDates] = useState<DateObject[]>([]);
   const [isMultiSelect, setIsMultiSelect] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const {mutate, isSuccess} = useRecipeCalendarMutate()
 
 
   const handleSaveDateClick = () => {
+    const formattedDates = selectedDates.map(dateObj => 
+        dateObj.toDate().toISOString().split('T')[0]
+    )
 
+    const recipeDate: RecipeDate = {
+        recipeId,
+        dates: formattedDates,
+        quantity
+    };
+
+    mutate(recipeDate);
   }
 
-  const handleCancelDateClick = () => {
-
-  }
+  useEffect(() => {
+    if(isSuccess)
+        closeCalendar
+  }, [isSuccess, closeCalendar])
 
   const handleDateChange = (dates: DateObject[]) => {
     setSelectedDates(dates);
@@ -94,3 +109,5 @@ export const MiniCalendar: React.FC<MiniCalendarProps> = ({ onDateSelect, recipe
 };
 
 export default MiniCalendar;
+
+

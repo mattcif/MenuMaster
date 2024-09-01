@@ -6,7 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -27,6 +29,9 @@ public class Recipe {
             fetch = FetchType.LAZY
     )
     private List<Ingredient> ingredients;
+
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
+    private Set<RecipeCalendar> recipeCalendars = new HashSet<>();
 
     public Recipe(RecipeRequestDTO data) {
         this.name = data.name();

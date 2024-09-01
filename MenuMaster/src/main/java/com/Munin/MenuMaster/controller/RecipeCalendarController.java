@@ -1,6 +1,7 @@
 package com.Munin.MenuMaster.controller;
 
 import com.Munin.MenuMaster.requestDTO.RecipeCalendarDTO;
+import com.Munin.MenuMaster.responseDTO.RecipeCalendarResponseDTO;
 import com.Munin.MenuMaster.service.RecipeCalendarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,9 +34,9 @@ public class RecipeCalendarController {
     // Novo método GET para recuperar todos os RecipeCalendars
     @GetMapping
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    public ResponseEntity<List<RecipeCalendarDTO>> getRecipeCalendars() {
+    public ResponseEntity<List<RecipeCalendarResponseDTO>> getRecipeCalendars() {
         try {
-            List<RecipeCalendarDTO> recipeCalendars = recipeCalendarService.getAllRecipeCalendars();
+            List<RecipeCalendarResponseDTO> recipeCalendars = recipeCalendarService.getAllRecipeCalendars();
             return ResponseEntity.ok(recipeCalendars);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(null);

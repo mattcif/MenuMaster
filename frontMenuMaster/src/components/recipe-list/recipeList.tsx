@@ -4,13 +4,16 @@ import { useRecipeData } from '../../hooks/useRecipeData';
 import { CreateModal } from '../create-modal/createModal';
 import { DeleteRecipe } from '../recipe-delete/deleteRecipe';
 import './recipeList.css';
-import RecipeCaledar from "../calendar/Calendar"
+import RecipeCalendar  from "../calendar/Calendar"
 
 
 export function RecipeList() {
   const { data } = useRecipeData();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRecipeId, setSelectedRecipeId] = useState<string | null>(null);
+
+
+
 
   const handleOpenModal = () => {
     setIsModalOpen(prev => !prev);
@@ -33,7 +36,7 @@ export function RecipeList() {
 
   return (
     <div className="container">
-        <RecipeCaledar/>
+        <RecipeCalendar/>
 
       <h1>Receitas</h1>
       <div className='card-grid'>

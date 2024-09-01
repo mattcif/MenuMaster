@@ -3,6 +3,7 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { EventInput } from '@fullcalendar/core';
+import { useRecipeCalendarData } from '../../hooks/useRecipeCalendarData';
 
 interface RecipeEvent extends EventInput {
   title: string;
@@ -12,14 +13,23 @@ interface RecipeEvent extends EventInput {
   };
 }
 
-const Calendar = () => {
-  // Exemplo de eventos (receitas)
-  const events: RecipeEvent[] = [
-    { title: 'Receita 1', start: '2024-08-25', extendedProps: { quantity: 3 } },
-    { title: 'Receita 2', start: '2024-08-25', extendedProps: { quantity: 2 } },
-    { title: 'Receita 3', start: '2024-08-26', extendedProps: { quantity: 1 } },
-    // Adicione mais eventos conforme necessário
-  ];
+const Calendar: React.FC = () => {
+  const { data, isLoading, error } = useRecipeCalendarData();
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+
+  console.log('Data received:', data);
+
+  const events: RecipeEvent[] = data?.flatMap(recipe => 
+    recipe.dates.map(date => ({
+      title: recipe.name || 'No name', 
+      start: date,
+      extendedProps: {
+        quantity: recipe.quantity
+      }
+    }))
+  ) || [];
 
   return (
     <FullCalendar
@@ -36,7 +46,6 @@ const Calendar = () => {
           <b>{eventInfo.event.extendedProps.quantity}x {eventInfo.event.title}</b>
         </div>
       )}
-      // Habilita o ajuste automático para evitar sobreposição
       slotEventOverlap={false}
       height={600}
     />

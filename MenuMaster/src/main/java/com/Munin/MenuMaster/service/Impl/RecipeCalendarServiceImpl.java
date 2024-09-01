@@ -7,13 +7,13 @@ import com.Munin.MenuMaster.repository.CalendarRepository;
 import com.Munin.MenuMaster.repository.RecipeCalendarRepository;
 import com.Munin.MenuMaster.repository.RecipeRepository;
 import com.Munin.MenuMaster.requestDTO.RecipeCalendarDTO;
+import com.Munin.MenuMaster.responseDTO.RecipeCalendarResponseDTO;
 import com.Munin.MenuMaster.service.RecipeCalendarService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,7 +54,7 @@ public class RecipeCalendarServiceImpl implements RecipeCalendarService {
                         return recipeCalendarRepository.save(newRecipeCalendar);
                     });
 
-            if(recipeCalendar.getId() != null) {
+            if (recipeCalendar.getId() != null) {
                 recipeCalendar.setQuantity(recipeCalendarDTO.getQuantity());
                 recipeCalendarRepository.save(recipeCalendar);
             }
@@ -65,19 +65,18 @@ public class RecipeCalendarServiceImpl implements RecipeCalendarService {
 
     @Override
     @Transactional
-    public List<RecipeCalendarDTO> getAllRecipeCalendars() {
+    public List<RecipeCalendarResponseDTO> getAllRecipeCalendars() {
         List<RecipeCalendar> recipeCalendars = recipeCalendarRepository.findAll();
 
         return recipeCalendars.stream().map(recipeCalendar -> {
-            RecipeCalendarDTO dto = new RecipeCalendarDTO();
-            dto.setRecipeId(recipeCalendar.getRecipe().getId());
+            RecipeCalendarResponseDTO dto = new RecipeCalendarResponseDTO();
+            dto.setName(recipeCalendar.getRecipe().getName());
             dto.setDates(
                     List.of(recipeCalendar.getCalendar().getDate().toString())
-            ); // Convert LocalDate to String
+            );
             dto.setQuantity(recipeCalendar.getQuantity());
             return dto;
         }).collect(Collectors.toList());
     }
-
 }
 

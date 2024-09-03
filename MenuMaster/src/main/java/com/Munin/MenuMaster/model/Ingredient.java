@@ -31,4 +31,17 @@ public class Ingredient {
         this.quantity = data.quantity();
         this.typeQuantity = data.typeQuantity();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Ingredient that)) return false;
+
+        return getName().equals(that.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return getName().hashCode();
+    }
 }

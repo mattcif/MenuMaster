@@ -1,6 +1,7 @@
 package com.Munin.MenuMaster.controller;
 
-import com.Munin.MenuMaster.requestDTO.RecipeCalendarDTO;
+import com.Munin.MenuMaster.requestDTO.RecipeCalendarRequestDTO;
+import com.Munin.MenuMaster.requestDTO.ShoppingListRequestDTO;
 import com.Munin.MenuMaster.responseDTO.RecipeCalendarResponseDTO;
 import com.Munin.MenuMaster.service.RecipeCalendarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +18,12 @@ public class RecipeCalendarController {
     @Autowired
     private RecipeCalendarService recipeCalendarService;
 
-
-
     @PostMapping("/create")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<String> createOrUpdateRecipeCalendar(@RequestBody RecipeCalendarDTO recipeCalendarDTO) {
+    public ResponseEntity<String> createOrUpdateRecipeCalendar(@RequestBody RecipeCalendarRequestDTO recipeCalendarRequestDTO) {
         try {
-            recipeCalendarService.createOrUpdateRecipeCalendar(recipeCalendarDTO);
+            recipeCalendarService.createOrUpdateRecipeCalendar(recipeCalendarRequestDTO);
             return new ResponseEntity<>("RecipeCalendar created or updated successfully", HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>("Error processing recipe calendar: " + e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -40,6 +39,20 @@ public class RecipeCalendarController {
             return ResponseEntity.ok(recipeCalendars);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+    @PostMapping("/shopping-list/create")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @ResponseStatus(HttpStatus.CREATED)
+    private ResponseEntity<String> createMarketShoppingList(@RequestBody ShoppingListRequestDTO shoppingListRequestDTO) {
+        try {
+            String startDate = shoppingListRequestDTO.getStartDate();
+            String endDate = shoppingListRequestDTO.getEndDate();
+            recipeCalendarService.createShoppingList(startDate, endDate);
+            return new ResponseEntity<>("Market Shopping List Created Successfully", HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error processing Market Shopping List", HttpStatus.BAD_REQUEST);
         }
     }
 }

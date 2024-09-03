@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card } from '../../components/card/card';
 import { useRecipeData } from '../../hooks/useRecipeData';
 import { CreateModal } from '../create-modal/createModal';
 import { DeleteRecipe } from '../recipe-delete/deleteRecipe';
 import './recipeList.css';
 import RecipeCalendar  from "../calendar/Calendar"
+import ShoppingListInterval from '../shopping-list-interval/ShoppingListInterval';
 
 
 export function RecipeList() {
   const { data } = useRecipeData();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isIntervalOpen, setIsIntervalOpen] = useState(false);
   const [selectedRecipeId, setSelectedRecipeId] = useState<string | null>(null);
 
 
@@ -34,9 +36,26 @@ export function RecipeList() {
     return text;
   };
 
+  const closeInterval = () => {
+    setIsIntervalOpen(false);
+  };
+
+
   return (
     <div className="container">
         <RecipeCalendar/>
+
+        <div>
+      <button onClick={() => setIsIntervalOpen(true)}>Abrir Intervalo de Datas</button>
+      {isIntervalOpen && (
+        <ShoppingListInterval 
+          onIntervalSelect={(startDate, endDate) => {
+            console.log('Intervalo Selecionado:', startDate, endDate);
+          }} 
+          closeInterval={closeInterval} // Passa a função corretamente aqui
+        />
+      )}
+    </div>
 
       <h1>Receitas</h1>
       <div className='card-grid'>

@@ -39,4 +39,17 @@ public class Recipe {
         this.image = data.image();
         this.ingredients = data.ingredients();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Recipe recipe)) return false;
+
+        return getId().equals(recipe.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
+    }
 }

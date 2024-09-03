@@ -2,6 +2,7 @@ package com.Munin.MenuMaster.controller;
 
 import com.Munin.MenuMaster.requestDTO.RecipeCalendarRequestDTO;
 import com.Munin.MenuMaster.requestDTO.ShoppingListRequestDTO;
+import com.Munin.MenuMaster.responseDTO.MarketShoppingListResponseDTO;
 import com.Munin.MenuMaster.responseDTO.RecipeCalendarResponseDTO;
 import com.Munin.MenuMaster.service.RecipeCalendarService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,4 +56,29 @@ public class RecipeCalendarController {
             return new ResponseEntity<>("Error processing Market Shopping List", HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping("/shopping-list")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @ResponseStatus(HttpStatus.OK)
+    private ResponseEntity<List<MarketShoppingListResponseDTO>> getMarketShoppingList() {
+        try {
+            List<MarketShoppingListResponseDTO> marketShoppingList = recipeCalendarService.getAllShoppingList();
+            return ResponseEntity.ok(marketShoppingList);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+    @GetMapping("/shopping-list/{id}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @ResponseStatus(HttpStatus.OK)
+    private ResponseEntity<MarketShoppingListResponseDTO> getMarketShoppingListById(@PathVariable String id) {
+        try {
+            MarketShoppingListResponseDTO dto = recipeCalendarService.getShoppingListById(id);
+            return ResponseEntity.ok(dto);
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
 }

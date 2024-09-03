@@ -7,10 +7,12 @@ import com.Munin.MenuMaster.repository.MarketShoppingListRepository;
 import com.Munin.MenuMaster.repository.RecipeCalendarRepository;
 import com.Munin.MenuMaster.repository.RecipeRepository;
 import com.Munin.MenuMaster.requestDTO.RecipeCalendarRequestDTO;
+import com.Munin.MenuMaster.responseDTO.MarketShoppingListResponseDTO;
 import com.Munin.MenuMaster.responseDTO.RecipeCalendarResponseDTO;
 import com.Munin.MenuMaster.service.RecipeCalendarService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -81,6 +83,8 @@ public class RecipeCalendarServiceImpl implements RecipeCalendarService {
         }).collect(Collectors.toList());
     }
 
+
+    // todo REFATORAR CONTROLLER SERVICE PARA SHOPPINGLIST
     @Override
     @Transactional
     public void createShoppingList(String startDate, String endDate) {
@@ -112,7 +116,31 @@ public class RecipeCalendarServiceImpl implements RecipeCalendarService {
 
     }
 
-    // todo getAllRecipeCalendars RecipeCalendarRequestDTO
+    @Override
+    @Transactional
+    public MarketShoppingListResponseDTO getShoppingListById(String id) {
+        MarketShoppingList marketShoppingList = shoppingListRepository.findById(UUID.fromString(id))
+                .orElseThrow(() -> new NoSuchElementException("Shopping list not found with id"));
+
+        return convertShoppingListToDTO(marketShoppingList);
+    }
+
+    @Override
+    @Transactional
+    public List<MarketShoppingListResponseDTO> getAllShoppingList() {
+        List<MarketShoppingList> marketShoppingLists = shoppingListRepository.findAll();
+        return marketShoppingLists.stream().map(this::convertShoppingListToDTO).collect(Collectors.toList());
+    }
+
+    private MarketShoppingListResponseDTO convertShoppingListToDTO(MarketShoppingList marketShoppingList) {
+        MarketShoppingListResponseDTO dto = new MarketShoppingListResponseDTO();
+        dto.setId(marketShoppingList.getId());
+        dto.setStartDate(marketShoppingList.getStart().toString());
+        dto.setEndDate(marketShoppingList.getEnd().toString());
+        dto.setShoppingList(marketShoppingList.getShoppingList());
+
+        return dto;
+    }
 
     private List<RecipeCalendarRequestDTO> filteredRecipesByDate(String startDateStr, String endDateStr) {
         LocalDate startDate = LocalDate.parse(startDateStr);

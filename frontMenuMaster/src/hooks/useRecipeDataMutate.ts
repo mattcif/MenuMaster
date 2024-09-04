@@ -1,11 +1,13 @@
-import axios, { AxiosPromise } from "axios"
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { request } from "../helpers/axios_helper"; // Ajustado o caminho conforme solicitado
 import { RecipeData } from "../interface/RecipeData";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-const API_URL = 'http://localhost:8080'
-
-const postData = async (data: RecipeData): AxiosPromise<any> => {
-    const response = axios.post(API_URL + '/menu-master/recipe/register', data) 
+const postData = async (data: RecipeData) => {
+    const response = await request(
+        'POST', // Método HTTP
+        '/menu-master/recipe/register', // URL
+        data // Dados para o corpo da requisição
+    );
     return response;
 }
 
@@ -15,9 +17,9 @@ export function useRecipeDataMutate() {
         mutationFn: postData,
         retry: 2,
         onSuccess: () => {
-            queryClient.invalidateQueries(['recipe-data'])
+            queryClient.invalidateQueries(['recipe-data']);
         }
-    })
+    });
 
-    return mutate
+    return mutate;
 }

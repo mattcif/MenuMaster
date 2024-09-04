@@ -1,10 +1,12 @@
-import axios, { AxiosPromise } from "axios";
+import { AxiosPromise } from "axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-
-const API_URL = 'http://localhost:8080';
+import { request } from "../helpers/axios_helper"; 
 
 const deleteRecipe = async (recipeId: string): AxiosPromise<any> => {
-    const response = await axios.delete(`${API_URL}/menu-master/recipe/${recipeId}`);
+    const response = await request(
+        'DELETE', 
+        `/menu-master/recipe/${recipeId}` 
+    );
     return response;
 }
 

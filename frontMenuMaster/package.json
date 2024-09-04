@@ -17,6 +17,8 @@
     "@fullcalendar/timegrid": "^6.1.15",
     "@tanstack/react-query": "^5.52.1",
     "axios": "^1.7.5",
+    "bootstrap": "^5.3.3",
+    "classnames": "^2.5.1",
     "moment": "^2.30.1",
     "moment-timezone": "^0.5.45",
     "react": "^18.3.1",

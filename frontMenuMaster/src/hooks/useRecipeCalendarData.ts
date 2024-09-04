@@ -1,11 +1,12 @@
-import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { request } from "../helpers/axios_helper"; 
 import { RecipeDateFullCalendar } from "../interface/RecipeDateFullCalendar";
 
-const API_URL = 'http://localhost:8080'
-
 const fetchData = async (): Promise<RecipeDateFullCalendar[]> => {
-    const response = await axios.get(API_URL + '/menu-master/calendar');
+    const response = await request(
+        'GET', // Método HTTP
+        '/menu-master/calendar' // URL
+    );
     return response.data;
 }
 

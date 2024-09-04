@@ -5,7 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.Munin.MenuMaster.service", "com.Munin.MenuMaster.controller"})
+@ComponentScan(basePackages = {
+		"com.Munin.MenuMaster.service",
+		"com.Munin.MenuMaster.controller",
+		"com.Munin.MenuMaster.mappers",
+		"com.Munin.MenuMaster.config"
+})
 public class MenuMasterApplication {
 
 	public static void main(String[] args) {

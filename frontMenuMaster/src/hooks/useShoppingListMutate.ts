@@ -1,13 +1,13 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios, { AxiosPromise } from "axios";
-import { ShoppingListToSave } from "../interface/ShoppingListToSave";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { request } from '../helpers/axios_helper'; 
+import { ShoppingListToSave } from '../interface/ShoppingListToSave';
 
-const API_URL = 'http://localhost:8080'
+const API_URL = '/menu-master/calendar/shopping-list/create';
 
-const postData = async (data: ShoppingListToSave): AxiosPromise<any> => {
-    const response = axios.post(API_URL + '/menu-master/calendar/shopping-list/create', data) 
-    return response;
-}
+const postData = async (data: ShoppingListToSave) => {
+    const response = await request('POST', API_URL, data);
+    return response.data;
+};
 
 export function useShoppingListMutate() {
     const queryClient = useQueryClient();
@@ -15,10 +15,9 @@ export function useShoppingListMutate() {
         mutationFn: postData,
         retry: 2,
         onSuccess: () => {
-            queryClient.invalidateQueries(['shopping-data'])
+            queryClient.invalidateQueries(['shopping-data']);
         }
-    })
+    });
 
-    return mutate
+    return mutate;
 }
-

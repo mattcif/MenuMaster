@@ -1,13 +1,12 @@
-import axios, { AxiosPromise } from "axios"
-import { RecipeData } from "../interface/RecipeData"
-import { useQuery } from "@tanstack/react-query"
+import { useQuery } from "@tanstack/react-query";
+import { request } from "../helpers/axios_helper"; 
+import { RecipeData } from "../interface/RecipeData";
 
-
-
-const API_URL = 'http://localhost:8080'
-
-const fetchData = async (id: string): AxiosPromise<RecipeData> => {
-    const response = axios.get(`${API_URL}/menu-master/recipe/${id}`)
+const fetchData = async (id: string) => {
+    const response = await request(
+        'GET', // Método HTTP
+        `/menu-master/recipe/${id}` // URL
+    );
     return response;
 }
 
@@ -16,7 +15,7 @@ export function useRecipeDataDetails(id: string) {
         queryFn: () => fetchData(id),
         queryKey: ['recipe-detail', id],
         retry: 2
-    })
+    });
 
     return {
         ...query,

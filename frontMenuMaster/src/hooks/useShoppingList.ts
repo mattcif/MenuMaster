@@ -1,12 +1,12 @@
-import axios, { AxiosPromise } from "axios";
-import { ShoppingList } from "../interface/ShoppingList";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query';
+import { request } from '../helpers/axios_helper'; // Ajustado o caminho conforme solicitado
+import { ShoppingList } from '../interface/ShoppingList';
 
-const API_URL = 'http://localhost:8080'
+const API_URL = '/menu-master/calendar/shopping-list';
 
-const fetchData = async (): AxiosPromise<ShoppingList[]> => {
-    const response = axios.get(API_URL + '/menu-master/calendar/shopping-list') // primeiro parametro é a url e o outro é o body
-    return response;
+const fetchData = async (): Promise<ShoppingList[]> => {
+    const response = await request('GET', API_URL);
+    return response.data;
 }
 
 export function useShoppingList() {
@@ -18,6 +18,6 @@ export function useShoppingList() {
 
     return {
         ...query,
-        data: query.data?.data
+        data: query.data
     }
 }

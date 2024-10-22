@@ -1,15 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
-import { request } from '../helpers/axios_helper'; // Ajustado o caminho conforme solicitado
+import api from '../services/api'; // Importando o api.js
 import { RecipeData } from '../interface/RecipeData';
 
 // Função para atualizar a receita
 const updateRecipe = async (data: RecipeData) => {
-    const response = await request(
-        'PUT', // Método HTTP
-        `/menu-master/recipe/${data.id}`, // URL
-        data // Dados para o corpo da requisição
-    );
-    return response.data;
+    const response = await api.put(`/recipe/${data.id}`, data); // URL e dados para o corpo da requisição
+    return response.data; // Retorna apenas os dados
 };
 
 export function useRecipeUpdate() {

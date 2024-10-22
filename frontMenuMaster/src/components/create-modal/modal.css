@@ -1,10 +1,9 @@
+/* modal.css */
 .modal-overlay {
     position: fixed;
     inset: 0;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
     overflow: hidden;
-    height: 100vh;
-    width: 100vw;
 
     display: flex;
     align-items: center;
@@ -15,35 +14,37 @@
 
 .modal-overlay .modal-body {
     background-color: white;
-    padding: 7%;
-    height: 60%;
-    width: 60%;
-    border-radius: 24px;
+    padding: 2rem; /* Ajuste de padding para maior controle */
+    height: 80vh; /* Ocupa 80% da altura da tela */
+    width: 90vw; /* Ocupa 90% da largura da tela */
+    border-radius: 16px;
 
     display: flex;
-    align-items: flex-start;
     flex-direction: column;
     justify-content: space-between;
+    box-sizing: border-box; /* Inclui o padding dentro da altura e largura */
+    overflow-y: auto; /* Permite rolagem interna, se necessário */
 }
 
 .modal-overlay .modal-body h2 {
     font-size: 32px;
+    margin: 0;
 }
 
-.modal-overlay .modal-body .input-container  {
-    width: calc(100% - 24px);
+.modal-overlay .modal-body .input-container {
+    width: 100%;
 }
 
-.modal-overlay .modal-body input  {
+.modal-overlay .modal-body input {
     padding: 12px;
-    border: 2px solid #c6c5c5c5;
-    color: rgba(0,0,0,0.9);
+    border: 2px solid #c6c5c5;
+    color: rgba(0, 0, 0, 0.9);
     font-size: 18px;
     line-height: 24px;
     border-radius: 12px;
     width: 100%;
-
     margin-bottom: 12px;
+    box-sizing: border-box;
 }
 
 .modal-overlay .modal-body label {
@@ -53,33 +54,35 @@
     font-size: 18px;
 }
 
-.modal-overlay .modal-body .btn-secondary {
-    position: initial;
+.modal-overlay .modal-body .btn-secondery {
     width: 100%;
-    margin-top: 32px;
-}
-
-.modal-overlay .modal-body .btn-secondary:hover {
+    margin-top: 16px;
+    padding: 12px;
     background-color: #3a44f8;
-    transform: scale(1);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
 }
 
-.modal-overlay .modal-body .modal-header  {
+.modal-overlay .modal-body .btn-secondery:hover {
+    background-color: #2a34d8;
+    transform: scale(1.02);
+}
+
+.modal-overlay .modal-body .modal-header {
     width: 100%;
-    display: inline-flex;
-    justify-content: space-around;
-
-}
-
-.modal-overlay .modal-body .modal-header h2 {
-    justify-content: start;
-    align-items: start;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .modal-overlay .modal-body .modal-header button {
-    padding: 24px;
+    padding: 8px;
     background-color: transparent;
     border: none;
     color: red;
-
+    font-size: 24px;
+    cursor: pointer;
 }

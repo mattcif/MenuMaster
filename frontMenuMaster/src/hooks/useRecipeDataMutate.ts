@@ -1,14 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { request } from "../helpers/axios_helper"; // Ajustado o caminho conforme solicitado
+import api from "../services/api"; // Importando o api.js
 import { RecipeData } from "../interface/RecipeData";
 
 const postData = async (data: RecipeData) => {
-    const response = await request(
-        'POST', // Método HTTP
-        '/menu-master/recipe/register', // URL
-        data // Dados para o corpo da requisição
-    );
-    return response;
+    const response = await api.post('/recipe/register', data); // URL e dados para o corpo da requisição
+    return response.data; // Retorna apenas os dados
 }
 
 export function useRecipeDataMutate() {

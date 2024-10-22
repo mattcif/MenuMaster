@@ -27,4 +27,6 @@ public class MarketShoppingList {
             fetch = FetchType.LAZY
     )
     private List<Ingredient> shoppingList;
+
+    private String ownerUsername;
 }

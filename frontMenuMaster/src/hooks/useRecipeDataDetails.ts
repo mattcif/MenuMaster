@@ -1,13 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { request } from "../helpers/axios_helper"; 
-import { RecipeData } from "../interface/RecipeData";
+import api from "../services/api"; // Importando o api.js
 
 const fetchData = async (id: string) => {
-    const response = await request(
-        'GET', // Método HTTP
-        `/menu-master/recipe/${id}` // URL
-    );
-    return response;
+    const response = await api.get(`/recipe/${id}`); // URL
+    return response.data; // Retorna apenas os dados
 }
 
 export function useRecipeDataDetails(id: string) {
@@ -19,6 +15,6 @@ export function useRecipeDataDetails(id: string) {
 
     return {
         ...query,
-        data: query.data?.data
+        data: query.data // Não é mais necessário acessar query.data?.data
     };
 }

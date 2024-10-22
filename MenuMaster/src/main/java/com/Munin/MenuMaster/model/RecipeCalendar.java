@@ -15,6 +15,7 @@ public class RecipeCalendar {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
     @ManyToOne
@@ -26,5 +27,7 @@ public class RecipeCalendar {
     private Calendar calendar;
 
     private Integer quantity;
+
+    private String ownerUsername;
 
 }

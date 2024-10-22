@@ -1,30 +1,34 @@
 package com.Munin.MenuMaster.controller;
 
-import com.Munin.MenuMaster.requestDTO.RecipeCalendarRequestDTO;
-import com.Munin.MenuMaster.requestDTO.ShoppingListRequestDTO;
-import com.Munin.MenuMaster.responseDTO.MarketShoppingListResponseDTO;
-import com.Munin.MenuMaster.responseDTO.RecipeCalendarResponseDTO;
+import com.Munin.MenuMaster.dto.requestDTO.RecipeCalendarRequestDTO;
+import com.Munin.MenuMaster.dto.requestDTO.ShoppingListRequestDTO;
+import com.Munin.MenuMaster.dto.responseDTO.MarketShoppingListResponseDTO;
+import com.Munin.MenuMaster.dto.responseDTO.RecipeCalendarResponseDTO;
 import com.Munin.MenuMaster.service.RecipeCalendarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/menu-master/calendar")
+@RequestMapping("/api/calendar")
 public class RecipeCalendarController {
 
     @Autowired
     private RecipeCalendarService recipeCalendarService;
 
     @PostMapping("/create")
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<String> createOrUpdateRecipeCalendar(@RequestBody RecipeCalendarRequestDTO recipeCalendarRequestDTO) {
+    public ResponseEntity<String> createOrUpdateRecipeCalendar(
+            @RequestBody RecipeCalendarRequestDTO recipeCalendarRequestDTO,
+            @AuthenticationPrincipal UserDetails userDetails) {
+        String username = userDetails.getUsername();
         try {
-            recipeCalendarService.createOrUpdateRecipeCalendar(recipeCalendarRequestDTO);
+            recipeCalendarService.createOrUpdateRecipeCalendar(recipeCalendarRequestDTO, username);
             return new ResponseEntity<>("RecipeCalendar created or updated successfully", HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>("Error processing recipe calendar: " + e.getMessage(), HttpStatus.BAD_REQUEST);
@@ -33,10 +37,10 @@ public class RecipeCalendarController {
 
     // Novo método GET para recuperar todos os RecipeCalendars
     @GetMapping
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
-    public ResponseEntity<List<RecipeCalendarResponseDTO>> getRecipeCalendars() {
+    public ResponseEntity<List<RecipeCalendarResponseDTO>> getRecipeCalendars(@AuthenticationPrincipal UserDetails userDetails) {
+        String username = userDetails.getUsername();
         try {
-            List<RecipeCalendarResponseDTO> recipeCalendars = recipeCalendarService.getAllRecipeCalendars();
+            List<RecipeCalendarResponseDTO> recipeCalendars = recipeCalendarService.getAllRecipeCalendarsForUsernmae(username);
             return ResponseEntity.ok(recipeCalendars);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(null);
@@ -44,13 +48,15 @@ public class RecipeCalendarController {
     }
 
     @PostMapping("/shopping-list/create")
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @ResponseStatus(HttpStatus.CREATED)
-    private ResponseEntity<String> createMarketShoppingList(@RequestBody ShoppingListRequestDTO shoppingListRequestDTO) {
+    private ResponseEntity<String> createMarketShoppingList(
+            @RequestBody ShoppingListRequestDTO shoppingListRequestDTO,
+            @AuthenticationPrincipal UserDetails userDetails) {
+        String username = userDetails.getUsername();
         try {
             String startDate = shoppingListRequestDTO.getStartDate();
             String endDate = shoppingListRequestDTO.getEndDate();
-            recipeCalendarService.createShoppingList(startDate, endDate);
+            recipeCalendarService.createShoppingList(startDate, endDate, username);
             return new ResponseEntity<>("Market Shopping List Created Successfully", HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>("Error processing Market Shopping List", HttpStatus.BAD_REQUEST);
@@ -58,11 +64,11 @@ public class RecipeCalendarController {
     }
 
     @GetMapping("/shopping-list")
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @ResponseStatus(HttpStatus.OK)
-    private ResponseEntity<List<MarketShoppingListResponseDTO>> getMarketShoppingList() {
+    private ResponseEntity<List<MarketShoppingListResponseDTO>> getMarketShoppingList(@AuthenticationPrincipal UserDetails userDetails) {
+        String username = userDetails.getUsername();
         try {
-            List<MarketShoppingListResponseDTO> marketShoppingList = recipeCalendarService.getAllShoppingList();
+            List<MarketShoppingListResponseDTO> marketShoppingList = recipeCalendarService.getAllShoppingListForUsername(username);
             return ResponseEntity.ok(marketShoppingList);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(null);
@@ -70,9 +76,12 @@ public class RecipeCalendarController {
     }
 
     @GetMapping("/shopping-list/{id}")
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @ResponseStatus(HttpStatus.OK)
-    private ResponseEntity<MarketShoppingListResponseDTO> getMarketShoppingListById(@PathVariable String id) {
+    private ResponseEntity<MarketShoppingListResponseDTO> getMarketShoppingListById(
+            @PathVariable String id,
+            @AuthenticationPrincipal UserDetails userDetails) {
+        String username = userDetails.getUsername();
+
         try {
             MarketShoppingListResponseDTO dto = recipeCalendarService.getShoppingListById(id);
             return ResponseEntity.ok(dto);
@@ -80,5 +89,4 @@ public class RecipeCalendarController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
-
 }

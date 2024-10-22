@@ -1,20 +1,21 @@
 package com.Munin.MenuMaster.service.Impl;
 
-import com.Munin.MenuMaster.model.*;
 import com.Munin.MenuMaster.model.Calendar;
+import com.Munin.MenuMaster.model.*;
 import com.Munin.MenuMaster.repository.CalendarRepository;
 import com.Munin.MenuMaster.repository.MarketShoppingListRepository;
 import com.Munin.MenuMaster.repository.RecipeCalendarRepository;
 import com.Munin.MenuMaster.repository.RecipeRepository;
-import com.Munin.MenuMaster.requestDTO.RecipeCalendarRequestDTO;
-import com.Munin.MenuMaster.responseDTO.MarketShoppingListResponseDTO;
-import com.Munin.MenuMaster.responseDTO.RecipeCalendarResponseDTO;
+import com.Munin.MenuMaster.dto.requestDTO.RecipeCalendarRequestDTO;
+import com.Munin.MenuMaster.dto.responseDTO.MarketShoppingListResponseDTO;
+import com.Munin.MenuMaster.dto.responseDTO.RecipeCalendarResponseDTO;
 import com.Munin.MenuMaster.service.RecipeCalendarService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.parser.Entity;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
@@ -31,10 +32,10 @@ public class RecipeCalendarServiceImpl implements RecipeCalendarService {
 
     @Override
     @Transactional
-    public void createOrUpdateRecipeCalendar(RecipeCalendarRequestDTO recipeCalendarDTO) {
+    public void createOrUpdateRecipeCalendar(RecipeCalendarRequestDTO recipeCalendarDTO, String username) {
 
-        Recipe recipe = recipeRepository.findById(recipeCalendarDTO.getRecipe().getId())
-                .orElseThrow(() -> new RuntimeException("Recipe not found with id: " + recipeCalendarDTO.getRecipe().getId()));
+        Recipe recipe = recipeRepository.findById(recipeCalendarDTO.getRecipeId())
+                .orElseThrow(() -> new RuntimeException("Recipe not found with id: " + recipeCalendarDTO.getRecipeId()));
 
         List<LocalDate> dates = recipeCalendarDTO.getDates().stream()
                 .map(LocalDate::parse)
@@ -55,6 +56,7 @@ public class RecipeCalendarServiceImpl implements RecipeCalendarService {
                         newRecipeCalendar.setRecipe(recipe);
                         newRecipeCalendar.setCalendar(calendar);
                         newRecipeCalendar.setQuantity(recipeCalendarDTO.getQuantity());
+                        newRecipeCalendar.setOwnerUsername(username);
                         return recipeCalendarRepository.save(newRecipeCalendar);
                     });
 
@@ -69,8 +71,8 @@ public class RecipeCalendarServiceImpl implements RecipeCalendarService {
 
     @Override
     @Transactional
-    public List<RecipeCalendarResponseDTO> getAllRecipeCalendars() {
-        List<RecipeCalendar> recipeCalendars = recipeCalendarRepository.findAll();
+    public List<RecipeCalendarResponseDTO> getAllRecipeCalendarsForUsernmae(String username) {
+        List<RecipeCalendar> recipeCalendars = recipeCalendarRepository.findByOwnerUsername(username);
 
         return recipeCalendars.stream().map(recipeCalendar -> {
             RecipeCalendarResponseDTO dto = new RecipeCalendarResponseDTO();
@@ -87,14 +89,15 @@ public class RecipeCalendarServiceImpl implements RecipeCalendarService {
     // todo REFATORAR CONTROLLER SERVICE PARA SHOPPINGLIST
     @Override
     @Transactional
-    public void createShoppingList(String startDate, String endDate) {
+    public void createShoppingList(String startDate, String endDate, String username) {
         Map<Recipe, RecipeCalendarRequestDTO> recipesMap = new HashMap<>();
         List<Ingredient> totalIngredients = new ArrayList<>();
 
         List<RecipeCalendarRequestDTO> filteredList = filteredRecipesByDate(startDate, endDate);
 
         for (RecipeCalendarRequestDTO dto : filteredList) {
-            Recipe recipe = dto.getRecipe();
+            Recipe recipe = recipeRepository.findById(dto.getRecipeId())
+                    .orElseThrow(() -> new EntityNotFoundException("Recipe not found with id: " + dto.getRecipeId()));
             if (recipesMap.containsKey(recipe)) {
                 RecipeCalendarRequestDTO existingDto = recipesMap.get(recipe);
                 existingDto.setQuantity(existingDto.getQuantity() + dto.getQuantity());
@@ -111,6 +114,7 @@ public class RecipeCalendarServiceImpl implements RecipeCalendarService {
         marketShoppingList.setStart(LocalDate.parse(startDate));
         marketShoppingList.setEnd(LocalDate.parse(endDate));
         marketShoppingList.setShoppingList(shoppingList);
+        marketShoppingList.setOwnerUsername(username);
 
         shoppingListRepository.save(marketShoppingList);
 
@@ -127,7 +131,7 @@ public class RecipeCalendarServiceImpl implements RecipeCalendarService {
 
     @Override
     @Transactional
-    public List<MarketShoppingListResponseDTO> getAllShoppingList() {
+    public List<MarketShoppingListResponseDTO> getAllShoppingListForUsername(String username) {
         List<MarketShoppingList> marketShoppingLists = shoppingListRepository.findAll();
         return marketShoppingLists.stream().map(this::convertShoppingListToDTO).collect(Collectors.toList());
     }
@@ -162,7 +166,7 @@ public class RecipeCalendarServiceImpl implements RecipeCalendarService {
 
         return recipeCalendars.stream().map(recipeCalendar -> {
             RecipeCalendarRequestDTO dto = new RecipeCalendarRequestDTO();
-            dto.setRecipe(recipeCalendar.getRecipe());
+            dto.setRecipeId(dto.getRecipeId());
             dto.setDates(
                     List.of(recipeCalendar.getCalendar().getDate().toString())
             );
@@ -175,7 +179,8 @@ public class RecipeCalendarServiceImpl implements RecipeCalendarService {
         Map<String, Ingredient> ingredientMap = new HashMap<>();
 
         for (RecipeCalendarRequestDTO dto : recipesTotalQuantity) {
-            Recipe recipe = dto.getRecipe();
+            Recipe recipe = recipeRepository.findById(dto.getRecipeId())
+                    .orElseThrow(() -> new EntityNotFoundException("Recipe not found with id: " + dto.getRecipeId()));
             Integer quantity = dto.getQuantity();
 
             if (recipe.getIngredients() != null) {

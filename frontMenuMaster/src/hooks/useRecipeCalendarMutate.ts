@@ -1,11 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { request } from "../helpers/axios_helper"; 
+import api from "../services/api"; // Importando o api.js
 import { RecipeDate } from "../interface/RecipeDate";
 
 const postData = async (_data: RecipeDate) => {
-    const response = await request(
-        'POST', // Método HTTP
-        '/menu-master/calendar/create', // URL
+    const response = await api.post(
+        '/calendar/create', // URL
         _data // Dados
     );
     return response;

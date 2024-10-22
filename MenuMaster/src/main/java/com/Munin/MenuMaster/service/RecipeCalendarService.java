@@ -1,22 +1,20 @@
 package com.Munin.MenuMaster.service;
 
-import com.Munin.MenuMaster.model.MarketShoppingList;
-import com.Munin.MenuMaster.requestDTO.RecipeCalendarRequestDTO;
-import com.Munin.MenuMaster.responseDTO.MarketShoppingListResponseDTO;
-import com.Munin.MenuMaster.responseDTO.RecipeCalendarResponseDTO;
+import com.Munin.MenuMaster.dto.requestDTO.RecipeCalendarRequestDTO;
+import com.Munin.MenuMaster.dto.responseDTO.MarketShoppingListResponseDTO;
+import com.Munin.MenuMaster.dto.responseDTO.RecipeCalendarResponseDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface RecipeCalendarService {
 
-    void createOrUpdateRecipeCalendar(RecipeCalendarRequestDTO recipeCalendarRequestDTO);
+    void createOrUpdateRecipeCalendar(RecipeCalendarRequestDTO recipeCalendarRequestDTO, String username);
 
-    List<RecipeCalendarResponseDTO> getAllRecipeCalendars();
+    List<RecipeCalendarResponseDTO> getAllRecipeCalendarsForUsernmae(String username);
 
-    void createShoppingList(String startDate, String endDate);
+    void createShoppingList(String startDate, String endDate, String username);
 
-    List<MarketShoppingListResponseDTO> getAllShoppingList();
+    List<MarketShoppingListResponseDTO> getAllShoppingListForUsername(String username);
 
     MarketShoppingListResponseDTO getShoppingListById(String id);
 }

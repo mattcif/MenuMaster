@@ -1,6 +1,6 @@
 package com.Munin.MenuMaster.model;
 
-import com.Munin.MenuMaster.requestDTO.IngredientRequestDto;
+import com.Munin.MenuMaster.dto.requestDTO.IngredientRequestDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +17,7 @@ public class Ingredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
     private String name;

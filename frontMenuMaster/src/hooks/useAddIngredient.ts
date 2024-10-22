@@ -1,15 +1,13 @@
-import { AxiosPromise } from "axios";
-import { Ingredient } from "../interface/Ingredient";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { request } from "../helpers/axios_helper"; // Ajuste o caminho conforme necessário
+import api from "../services/api"; // Importando o api.js
+import { Ingredient } from "../interface/Ingredient";
 
-const addIngredientToRecipe = async (data: { recipeId: string; ingredient: Ingredient}): AxiosPromise<any> => {
-    const response = await request(
-        'PATCH', // Método HTTP
-        `/menu-master/recipe/${data.recipeId}/add-ingredient`, // URL
-        data.ingredient // Corpo da requisição
+const addIngredientToRecipe = async (data: { recipeId: string; ingredient: Ingredient }) => {
+    const response = await api.patch(
+        `/recipe/${data.recipeId}/add-ingredient`, 
+        data.ingredient
     );
-    return response;
+    return response.data;
 }
 
 export function useAddIngredient() {

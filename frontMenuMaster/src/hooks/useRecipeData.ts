@@ -1,15 +1,13 @@
-// userRecipeData.ts
-
 import { AxiosPromise } from "axios";
 import { RecipeData } from "../interface/RecipeData";
 import { useQuery } from "@tanstack/react-query";
-import { request } from "../helpers/axios_helper"; // Importe a função request
+import api from "../services/api"; // Importe a instância do Axios configurada no api.js
 
-const API_URL = '/menu-master/recipe'; // O baseURL já está configurado no axios_helper.ts
+const API_URL = '/recipe';
 
 const fetchData = async (): AxiosPromise<RecipeData[]> => {
-    // Utilize a função request para realizar a requisição
-    return request('GET', API_URL);
+    // Agora, utilizamos a instância do api.js para fazer a requisição
+    return api.get(API_URL);
 }
 
 export function useRecipeData() {

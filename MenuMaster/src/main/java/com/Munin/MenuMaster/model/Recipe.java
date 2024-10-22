@@ -1,6 +1,6 @@
 package com.Munin.MenuMaster.model;
 
-import com.Munin.MenuMaster.requestDTO.RecipeRequestDTO;
+import com.Munin.MenuMaster.dto.requestDTO.RecipeRequestDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,11 +18,14 @@ import java.util.UUID;
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(columnDefinition = "BINARY(16)")
     private UUID id;
 
     private String name;
     private String preparationMethod;
     private String image;
+
+    private String ownerUsername;
 
     @OneToMany(
             cascade = CascadeType.ALL,

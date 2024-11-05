@@ -22,7 +22,7 @@ public class Recipe {
     private UUID id;
 
     private String name;
-    
+
     @Lob
     private String preparationMethod;
     private String image;

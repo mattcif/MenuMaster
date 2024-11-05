@@ -11,6 +11,7 @@ import com.Munin.MenuMaster.security.request.SignupRequest;
 import com.Munin.MenuMaster.security.response.LoginResponse;
 import com.Munin.MenuMaster.security.response.MessageResponse;
 import com.Munin.MenuMaster.security.response.UserInfoResponse;
+import com.Munin.MenuMaster.service.RecipeService;
 import com.Munin.MenuMaster.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,9 @@ public class AuthController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    RecipeService recipeService;
 
     @PostMapping("/public/signin")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
@@ -129,6 +133,12 @@ public class AuthController {
         }
         user.setRole(role);
         userRepository.save(user);
+
+        // todo addDefaultRecipes
+
+        recipeService.addDefaultRecipesForUser(user);
+
+
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }

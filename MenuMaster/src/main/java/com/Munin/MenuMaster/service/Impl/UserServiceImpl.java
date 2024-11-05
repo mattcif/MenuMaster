@@ -2,6 +2,7 @@ package com.Munin.MenuMaster.service.Impl;
 
 import com.Munin.MenuMaster.dto.UserDTO;
 import com.Munin.MenuMaster.model.AppRole;
+import com.Munin.MenuMaster.model.Recipe;
 import com.Munin.MenuMaster.model.Role;
 import com.Munin.MenuMaster.model.User;
 import com.Munin.MenuMaster.repository.RoleRepository;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -118,4 +120,6 @@ public class UserServiceImpl implements UserService {
                 user.getUpdatedDate()
         );
     }
+
+
 }

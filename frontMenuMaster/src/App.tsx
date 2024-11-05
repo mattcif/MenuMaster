@@ -6,19 +6,23 @@ import { RecipeDetail } from './components/recipe-detail/recipeDetail';
 import RecipeCalendar from './components/calendar/Calendar';
 import { ShoppingLists } from './components/shoppingLists/ShoppingLists';
 import { ShoppingListDetail } from './components/shopping-list-detail/ShoppingListDetail';
-import WelcomeContent from './components/authentication/WelcomeContent';
+import WelcomeContent from './pages/WelcomePage';
 import Login from './components/authentication/Login';
 import Signup from './components/authentication/Signup';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProtectedRoute from "./components/ProtectedRoute";
+import Navbar from './components/Navbar';
 
 const App = () => {
   return (
     <Router>
+      <Navbar/>
       <Routes>
         <Route path="/" element={<WelcomeContent />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+
+
         <Route
           path="/recipe"
           element={

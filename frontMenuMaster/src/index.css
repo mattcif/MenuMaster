@@ -7,6 +7,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom Styles */
+
+@import './components/card-recipe-homepage/cardRecipeHomePage.css';
+
 /* add custom effect to the table row */
 .MuiDataGrid-row:nth-of-type(odd) {
   background-color: #eee6e6;

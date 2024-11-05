@@ -1,0 +1,30 @@
+
+.card-recipe {
+    max-width: 1000px !important; /* Define uma largura máxima para o card */
+    overflow: hidden !important; /* Evita o vazamento de conteúdo */
+}
+
+.recipe-image {
+    height: auto !important; /* Mantém a proporção da imagem */
+}
+
+.button {
+    max-width: 150px !important; /* Define uma largura máxima para evitar que ocupem muito espaço */
+}
+
+.recipe-title p  {
+    overflow: hidden;          /* Oculta o texto que excede o limite */
+    text-overflow: ellipsis;   /* Adiciona reticências (...) ao final */
+    max-width: 200px;           /* Limita a largura ao tamanho do contêiner */
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cardContainer {
+    display: flex;
+    align-items: center;
+}

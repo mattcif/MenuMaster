@@ -1,8 +1,53 @@
+.scroll-container {
+    position: relative;
+
+}
+
+
 .scrollable-card-list {
-    max-height: 1000px; /* Defina o tamanho máximo da área visível */
-    overflow-y: auto;  /* Habilita o scroll vertical quando necessário */
-    padding: 10px;
+
+    max-height: calc(100vh - 120px);
+    height: 80vh;
+    min-width: 60vh;
+    overflow-y: auto;  
+    position: relative;
+    direction: rtl;
+    text-align: left;
+    margin: 20px auto;
+    padding: 10px 20px;
     background-color: #f8f9fa;
     border: 1px solid #ddd;
     border-radius: 8px;
+}
+
+.scrollable-card-list h1 {
+    justify-content: center;
+    align-items: center;
+    font-style: bold;
+}
+
+.fixed-search-bar {
+    position: relative;
+}
+
+
+.scrollable-card-list > div {
+    direction: ltr;
+
+}
+
+.card {
+    margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+    .scrollable-card-list {
+        max-width: 100vw;
+        max-height: calc(100vh - 100px); /* Altura menor para telas pequenas */
+        padding: 5px 10px; /* Reduzimos o padding em dispositivos menores */
+    }
+
+    .card {
+        max-width: 100%;
+    }
 }

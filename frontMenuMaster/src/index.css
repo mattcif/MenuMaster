@@ -10,6 +10,7 @@
 /* Custom Styles */
 
 @import './components/card-recipe-homepage/cardRecipeHomePage.css';
+@import './components/scrollable-card-list/ScrollableCardList.css';
 
 /* add custom effect to the table row */
 .MuiDataGrid-row:nth-of-type(odd) {

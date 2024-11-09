@@ -2,23 +2,29 @@ import { Container } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import React from 'react';
-import CardRecipeHomePage from '../components/card-recipe-homepage/CardRecipeHomePage';
-import ScrollableCardList from '../components/scrollable-card-list/ScrollableCardList';
+import { ScrollableCardList } from '../components/scrollable-card-list/ScrollableCardList';
 
-interface WelcomeContentProps {}
-interface WelcomeContentState {}
+interface WelcomeContentProps { }
+interface WelcomeContentState { }
 
 export default class WelcomeContent extends React.Component<WelcomeContentProps, WelcomeContentState> {
   render() {
     return (
-        <Container>
+      <Container fluid>
+        <section>
           <Row>
-            <Col> 
-              <ScrollableCardList/>
-              
+            <Col>
+              <ScrollableCardList />
+
+            </Col>
+            <Col>
+              <h1>Aqui é onde vai ficar o calendário</h1>
             </Col>
           </Row>
-        </Container>          
+        </section>
+
+
+      </Container>
     );
   }
 }

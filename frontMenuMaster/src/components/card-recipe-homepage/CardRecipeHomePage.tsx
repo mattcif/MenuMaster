@@ -18,13 +18,20 @@ const CardRecipeHomePage: React.FC<CardRecipeProps> = ({ id, name, image }) => {
     const navigate = useNavigate();
     const [isCalendarVisible, setIsCalendarVisible] = useState(false);
 
+
     const handleChooseDateClick = () => {
-        setIsCalendarVisible(prev => !prev);
+            setIsCalendarVisible(prev => !prev);
     }
 
     const handleDateSelect = (date: Date) => {
+        // lógica para tratar data selecionada
+        console.log(date);
+    }
+
+    const handleCalendarClose = () => {
         setIsCalendarVisible(false);
     }
+
 
     const handleDetailClick = () => {
         navigate(`/recipe/${id}`)
@@ -39,10 +46,10 @@ const CardRecipeHomePage: React.FC<CardRecipeProps> = ({ id, name, image }) => {
                     <Row className='justify-content-md-center align-items-center flex-nowrap'>
 
                         <Col sm={5} xs='auto' className='recipe-image'>
-                            <Image src={image} rounded style={{ width: '250px', height:'120px', maxWidth: '250px',  objectFit: 'cover', }}></Image>
+                            <Image src={image} rounded style={{ width: '250px', height: '120px', maxWidth: '250px', objectFit: 'cover', }}></Image>
                         </Col>
 
-                        <Col sm xs='auto' md={5} className='recipe-title' style={{  maxWidth: '150px', width: '126px', flex: '1' }}>
+                        <Col sm xs='auto' md={5} className='recipe-title' style={{ maxWidth: '150px', width: '126px', flex: '1' }}>
                             <OverlayTrigger
                                 placement="top"
                                 overlay={<Tooltip id="recipe-title-tooltip">{name}</Tooltip>}
@@ -78,7 +85,7 @@ const CardRecipeHomePage: React.FC<CardRecipeProps> = ({ id, name, image }) => {
                     {isCalendarVisible && (
                         <div className="calendar-container">
                             <MiniCalendar
-                                closeCalendar={handleChooseDateClick}
+                                closeCalendar={handleCalendarClose}
                                 onDateSelect={handleDateSelect}
                                 recipeName={name}
                                 recipeId={id} />

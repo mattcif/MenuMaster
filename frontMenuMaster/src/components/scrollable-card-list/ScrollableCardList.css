@@ -1,15 +1,14 @@
 .scroll-container {
     position: relative;
-
+    font-family: 'questrial';
 }
 
 
 .scrollable-card-list {
-
     max-height: calc(100vh - 120px);
     height: 80vh;
     min-width: 60vh;
-    overflow-y: auto;  
+    overflow-y: auto;
     position: relative;
     direction: rtl;
     text-align: left;
@@ -31,7 +30,7 @@
 }
 
 
-.scrollable-card-list > div {
+.scrollable-card-list>div {
     direction: ltr;
 
 }
@@ -43,8 +42,10 @@
 @media (max-width: 768px) {
     .scrollable-card-list {
         max-width: 100vw;
-        max-height: calc(100vh - 100px); /* Altura menor para telas pequenas */
-        padding: 5px 10px; /* Reduzimos o padding em dispositivos menores */
+        max-height: calc(100vh - 100px);
+        /* Altura menor para telas pequenas */
+        padding: 5px 10px;
+        /* Reduzimos o padding em dispositivos menores */
     }
 
     .card {

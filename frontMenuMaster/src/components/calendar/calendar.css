@@ -1,11 +1,113 @@
-.custom-event {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    background: #FF7043;
-    border-radius: 5px;
-    padding: 5px;
-    margin: 2px 0;
-    white-space: nowrap;
-  }
+/* Estilos gerais para o FullCalendar */
+.full-calendar-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
 
+.fc {
+  font-family: 'caveat';
+  max-width: 100%;
+  height: 1000px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Estilos para o evento customizado */
+.custom-event {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #FF7043;
+  border-radius: 5px;
+  padding: 5px;
+  white-space: nowrap;
+}
+
+.fc-col-header {
+  border-radius: 16px !important;
+}
+
+.fc-scrollgrid-section > td {
+  border-radius: 0px 0px 16px 16px !important;
+}
+
+.fc-scrollgrid-section > th {
+  border-radius: 0px 16px 0px 0px !important;
+}
+
+.fc-scrollgrid {
+  border-radius: 16px !important;
+}
+
+/* Estilos para o dia na visualização do Mês */
+.fc-dayGridMonth-view .fc-daygrid-day {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out; /* Transição suave */
+}
+
+/* Efeito de elevação e sombreamento apenas na visualização do Mês */
+.fc-dayGridMonth-view .fc-daygrid-day:hover {
+  transform: translateY(-5px); /* Move o quadrado do dia para cima */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombramento leve */
+}
+
+/* Efeito de elevação ao clicar (foco) na visualização do Mês */
+.fc-dayGridMonth-view .fc-daygrid-day:active {
+  transform: translateY(0px); /* Ajuste para "afundar" ao clicar */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombramento mais intenso ao clicar */
+}
+
+/* Efeito no dia atual na visualização do Mês */
+.fc-dayGridMonth-view .fc-daygrid-day.fc-day-today {
+  background-color: #f0f8ff; /* Cor de fundo para o dia atual */
+}
+
+.fc-dayGridMonth-view .fc-daygrid-day.fc-day-today:hover {
+  background-color: #cce7ff; /* Um tom mais forte de azul para o dia atual */
+}
+
+/* Adicionando bordas arredondadas aos quadrados dos dias na visualização do Mês */
+.fc-dayGridMonth-view .fc-daygrid-day-frame {
+  border-radius: 5px; /* Bordas arredondadas para os dias */
+}
+
+/* Estilos para eventos na visualização do Mês */
+.fc-dayGridMonth-view .fc-daygrid-event {
+  transition: transform 0.3s ease; /* Transição suave para os eventos */
+}
+
+/* Efeito de aumento no evento ao passar o mouse na visualização do Mês */
+.fc-dayGridMonth-view .fc-daygrid-event:hover {
+  transform: scale(1.05); /* Aumenta o tamanho do evento ao passar o mouse */
+  background-color: #FF5722; /* Cor de fundo ao passar o mouse */
+}
+
+/* Estilos apenas para a visualização do Dia (Day View) */
+.fc-dayGridDay-view .fc-daygrid-day-events {
+  font-size: 1.5rem; /* Aumenta o tamanho da fonte */
+  padding: 12px; /* Aumenta o espaçamento interno */
+}
+
+/* Estilos para os eventos na visualização do Dia */
+.fc-dayGridDay-view .fc-daygrid-event {
+  font-size: 1.5rem; /* Aumenta o tamanho da fonte dos eventos */
+  padding: 12px; /* Aumenta o espaçamento do evento */
+  min-height: 60px; /* Aumenta a altura mínima dos eventos */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Ajuste para bordas ou cor de fundo nos eventos da visualização do Dia */
+.fc-dayGridDay-view .fc-daygrid-event {
+  background-color: #FF7043; /* Cor de fundo */
+  color: white; /* Cor do texto */
+  font-weight: bold; /* Deixa o texto em negrito */
+}
+
+/* Efeito de sombra nos eventos ao passar o mouse na visualização do Dia */
+.fc-dayGridDay-view .fc-daygrid-event:hover {
+  background-color: #FF5722; /* Cor de fundo ao passar o mouse */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra ao passar o mouse */
+}

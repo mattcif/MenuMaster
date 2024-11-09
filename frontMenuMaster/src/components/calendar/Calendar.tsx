@@ -4,6 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { EventInput } from '@fullcalendar/core';
 import { useRecipeCalendarData } from '../../hooks/useRecipeCalendarData';
+import "./calendar.css"
 
 interface RecipeEvent extends EventInput {
   title: string;
@@ -21,9 +22,9 @@ const Calendar: React.FC = () => {
 
   console.log('Data received:', data);
 
-  const events: RecipeEvent[] = data?.flatMap(recipe => 
+  const events: RecipeEvent[] = data?.flatMap(recipe =>
     recipe.dates.map(date => ({
-      title: recipe.name || 'No name', 
+      title: recipe.name || 'No name',
       start: date,
       extendedProps: {
         quantity: recipe.quantity
@@ -31,24 +32,35 @@ const Calendar: React.FC = () => {
     }))
   ) || [];
 
+
+  const handleDateClick = (info: any) => {
+    // Altera a visualização para a visão do dia clicado
+    info.view.calendar.changeView('dayGridDay', info.dateStr); // 'dayGridDay' é a visão diária
+  };
+
+
   return (
-    <FullCalendar
-      plugins={[dayGridPlugin, interactionPlugin]}
-      initialView="dayGridMonth"
-      events={events}
-      headerToolbar={{
-        left: 'prev,next today',
-        center: 'title',
-        right: 'dayGridMonth,dayGridWeek,dayGridDay',
-      }}
-      eventContent={(eventInfo) => (
-        <div>
-          <b>{eventInfo.event.extendedProps.quantity}x {eventInfo.event.title}</b>
-        </div>
-      )}
-      slotEventOverlap={false}
-      height={600}
-    />
+    <div className="full-calendar-container">
+      <FullCalendar
+        plugins={[dayGridPlugin, interactionPlugin]}
+        initialView="dayGridMonth"
+        events={events}
+        headerToolbar={{
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,dayGridWeek,dayGridDay',
+        }}
+        eventContent={(eventInfo) => (
+          <div>
+            <b>{eventInfo.event.extendedProps.quantity}x {eventInfo.event.title}</b>
+          </div>
+        )}
+        slotEventOverlap={false}
+        height={600}
+        dateClick={handleDateClick}
+      />
+    </div>
+
   );
 };
 

@@ -28,7 +28,7 @@ export function ScrollableCardList() {
     return (
         <Container fluid >
 
-            <div className="d-flex justify-content-center align-items-center scroll-container" style={{ marginTop: "20px" }}>
+            <div className="d-flex justify-content-center align-items-center scroll-container" style={{ }}>
 
                 <Row>
                     <Col>
@@ -49,7 +49,7 @@ export function ScrollableCardList() {
                                 )
 
                             ) : (
-                                <h1>Nenhuma Receita Encontrada</h1>
+                                <h1>Nenhuma Receita Encontrada :'</h1>
                             )
                             }
 

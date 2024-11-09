@@ -22,3 +22,26 @@
 }
 
 /* custom effect for the table */
+
+
+/* FONTES */
+@font-face {
+  font-family: 'caveat' ;
+  src: url(../src/assets/fonts/Caveat/Caveat-VariableFont_wght.ttf)
+}
+
+@font-face {
+  font-family: 'questrial';
+  src: url(../src/assets/fonts/Questrial/Questrial-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'pacifico';
+  src: url(../src/assets/fonts/Pacifico/Pacifico-Regular.ttf);
+}
+
+body {
+  font-family: 'questrial';
+}
+
+

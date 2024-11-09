@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DatePicker, { DateObject } from 'react-multi-date-picker';
-import './mini-calendar.css'; // Inclua o arquivo CSS para estilização
+import './mini-calendar.css'; 
 import { RecipeDate } from '../../interface/RecipeDate';
 import { useRecipeCalendarMutate } from '../../hooks/useRecipeCalendarMutate';
 import { Button, Form } from 'react-bootstrap';
@@ -16,11 +16,8 @@ interface MiniCalendarProps {
 
 export const MiniCalendar: React.FC<MiniCalendarProps> = ({ onDateSelect, recipeId, recipeName, closeCalendar }) => {
   const [selectedDates, setSelectedDates] = useState<DateObject[]>([]);
-  const [isCalendarVisible, setIsCalendarVisible] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const { mutate, isSuccess, isPending } = useRecipeCalendarMutate();
-  const buttonRef = useRef<HTMLButtonElement | null>(null);
-  const calendarRef = useRef<HTMLDivElement | null>(null);
 
 
 
@@ -66,7 +63,7 @@ export const MiniCalendar: React.FC<MiniCalendarProps> = ({ onDateSelect, recipe
 
   return (
     <div className="mini-calendar-container">
-      <div className="calendar-header"> 
+      <div className="mini-calendar-header"> 
         <h1>{recipeName}</h1>
       </div>
       <div className="toolbar">

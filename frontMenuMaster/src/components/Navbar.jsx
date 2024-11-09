@@ -26,7 +26,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="h-headerHeight z-50 text-textColor bg-headerColor shadow-sm  flex items-center sticky top-0">
+    <header className="h-headerHeight z-50 text-textColor bg-headerColor shadow-sm  flex items-center sticky top-0" style={{ marginBottom: "20px"}}>''
       <nav className="sm:px-10 px-4 flex w-full h-full items-center justify-between">
         <Link to="/">
           {" "}

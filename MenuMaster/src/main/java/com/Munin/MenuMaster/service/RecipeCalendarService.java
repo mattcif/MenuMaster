@@ -12,9 +12,11 @@ public interface RecipeCalendarService {
 
     List<RecipeCalendarResponseDTO> getAllRecipeCalendarsForUsernmae(String username);
 
-    void createShoppingList(String startDate, String endDate, String username);
 
     List<MarketShoppingListResponseDTO> getAllShoppingListForUsername(String username);
+
+    // todo REFATORAR CONTROLLER SERVICE PARA SHOPPINGLIST
+    void createShoppingList(String startDate, String endDate, String username);
 
     MarketShoppingListResponseDTO getShoppingListById(String id);
 }

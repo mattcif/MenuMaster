@@ -17,7 +17,8 @@ public class MarketShoppingList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @Column(columnDefinition = "BINARY(16)")
+    private UUID id = UUID.randomUUID();
 
     private LocalDate start;
     private LocalDate end;

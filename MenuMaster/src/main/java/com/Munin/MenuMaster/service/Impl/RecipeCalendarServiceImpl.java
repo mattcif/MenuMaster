@@ -15,7 +15,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.parser.Entity;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
@@ -36,6 +35,7 @@ public class RecipeCalendarServiceImpl implements RecipeCalendarService {
 
         Recipe recipe = recipeRepository.findById(recipeCalendarDTO.getRecipeId())
                 .orElseThrow(() -> new RuntimeException("Recipe not found with id: " + recipeCalendarDTO.getRecipeId()));
+
 
         List<LocalDate> dates = recipeCalendarDTO.getDates().stream()
                 .map(LocalDate::parse)
@@ -85,19 +85,19 @@ public class RecipeCalendarServiceImpl implements RecipeCalendarService {
         }).collect(Collectors.toList());
     }
 
-
     // todo REFATORAR CONTROLLER SERVICE PARA SHOPPINGLIST
+
     @Override
     @Transactional
     public void createShoppingList(String startDate, String endDate, String username) {
         Map<Recipe, RecipeCalendarRequestDTO> recipesMap = new HashMap<>();
-        List<Ingredient> totalIngredients = new ArrayList<>();
 
         List<RecipeCalendarRequestDTO> filteredList = filteredRecipesByDate(startDate, endDate);
 
         for (RecipeCalendarRequestDTO dto : filteredList) {
             Recipe recipe = recipeRepository.findById(dto.getRecipeId())
                     .orElseThrow(() -> new EntityNotFoundException("Recipe not found with id: " + dto.getRecipeId()));
+
             if (recipesMap.containsKey(recipe)) {
                 RecipeCalendarRequestDTO existingDto = recipesMap.get(recipe);
                 existingDto.setQuantity(existingDto.getQuantity() + dto.getQuantity());
@@ -166,7 +166,8 @@ public class RecipeCalendarServiceImpl implements RecipeCalendarService {
 
         return recipeCalendars.stream().map(recipeCalendar -> {
             RecipeCalendarRequestDTO dto = new RecipeCalendarRequestDTO();
-            dto.setRecipeId(dto.getRecipeId());
+
+            dto.setRecipeId(recipeCalendar.getRecipe().getId());
             dto.setDates(
                     List.of(recipeCalendar.getCalendar().getDate().toString())
             );

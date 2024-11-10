@@ -18,7 +18,7 @@ public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(columnDefinition = "BINARY(16)")
-    private UUID id;
+    private UUID id = UUID.randomUUID();
 
     private String name;
 

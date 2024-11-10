@@ -40,8 +40,8 @@ const Calendar: React.FC = () => {
 
 
   return (
-    <div className="full-calendar-container">
-      <FullCalendar
+    <div  className="full-calendar-container">
+      <FullCalendar 
         plugins={[dayGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
         events={events}
@@ -56,7 +56,7 @@ const Calendar: React.FC = () => {
           </div>
         )}
         slotEventOverlap={false}
-        height={600}
+        height="100%"
         dateClick={handleDateClick}
       />
     </div>

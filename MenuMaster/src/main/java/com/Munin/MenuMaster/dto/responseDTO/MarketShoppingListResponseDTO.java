@@ -1,6 +1,7 @@
 package com.Munin.MenuMaster.dto.responseDTO;
 
 import com.Munin.MenuMaster.model.Ingredient;
+import com.Munin.MenuMaster.model.Recipe;
 import lombok.Data;
 
 import java.util.List;
@@ -12,4 +13,5 @@ public class MarketShoppingListResponseDTO {
     private String startDate;
     private String endDate;
     private List<Ingredient> shoppingList;
+    private List<Recipe> recipeList;
 }

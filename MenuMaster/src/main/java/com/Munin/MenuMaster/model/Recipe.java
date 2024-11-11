@@ -1,6 +1,7 @@
 package com.Munin.MenuMaster.model;
 
 import com.Munin.MenuMaster.dto.requestDTO.RecipeRequestDTO;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,6 +16,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@JsonIgnoreProperties({"recipeCalendars"})
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -37,6 +39,7 @@ public class Recipe {
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL)
     private Set<RecipeCalendar> recipeCalendars = new HashSet<>();
+
 
     public Recipe(RecipeRequestDTO data) {
         this.name = data.name();

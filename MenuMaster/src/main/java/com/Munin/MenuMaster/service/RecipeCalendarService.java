@@ -5,6 +5,7 @@ import com.Munin.MenuMaster.dto.responseDTO.MarketShoppingListResponseDTO;
 import com.Munin.MenuMaster.dto.responseDTO.RecipeCalendarResponseDTO;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface RecipeCalendarService {
 
@@ -19,4 +20,6 @@ public interface RecipeCalendarService {
     String createShoppingList(String startDate, String endDate, String username);
 
     MarketShoppingListResponseDTO getShoppingListById(String id);
+
+    void deleteShoppingListById(UUID id, String username);
 }

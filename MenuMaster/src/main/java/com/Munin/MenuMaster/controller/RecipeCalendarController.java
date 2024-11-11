@@ -90,4 +90,14 @@ public class RecipeCalendarController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
+
+    @DeleteMapping("/shopping-list/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    private void deleteShoppingListById(
+            @PathVariable UUID id,
+            @AuthenticationPrincipal UserDetails userDetails
+    ) {
+        String username = userDetails.getUsername();
+        recipeCalendarService.deleteShoppingListById(id, username);
+    }
 }

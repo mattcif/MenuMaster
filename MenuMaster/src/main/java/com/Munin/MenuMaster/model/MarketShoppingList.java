@@ -1,5 +1,6 @@
 package com.Munin.MenuMaster.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -28,6 +30,14 @@ public class MarketShoppingList {
             fetch = FetchType.LAZY
     )
     private List<Ingredient> shoppingList;
+
+    @ManyToMany(fetch = FetchType.EAGER) // Mudança para ManyToMany
+    @JoinTable(
+            name = "market_shopping_list_recipes",
+            joinColumns = @JoinColumn(name = "market_shopping_list_id"),
+            inverseJoinColumns = @JoinColumn(name = "recipe_id")
+    )
+    private List<Recipe> recipes;
 
     private String ownerUsername;
 }

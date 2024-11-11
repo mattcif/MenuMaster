@@ -91,6 +91,7 @@ public class RecipeCalendarServiceImpl implements RecipeCalendarService {
     @Transactional
     public String createShoppingList(String startDate, String endDate, String username) {
         Map<Recipe, RecipeCalendarRequestDTO> recipesMap = new HashMap<>();
+        List<Recipe> recipeList = new ArrayList<>();
 
         List<RecipeCalendarRequestDTO> filteredList = filteredRecipesByDate(startDate, endDate);
 
@@ -108,13 +109,31 @@ public class RecipeCalendarServiceImpl implements RecipeCalendarService {
 
         List<RecipeCalendarRequestDTO> recipesTotalQuantity = new ArrayList<>(recipesMap.values());
 
+
+
+        // setting recipeList attr
+
+        for (RecipeCalendarRequestDTO rcDto : recipesTotalQuantity) {
+            Recipe recipe = recipeRepository.findById(rcDto.getRecipeId()).orElseThrow(() -> new EntityNotFoundException("erro"));
+
+            recipeList.add(recipe);
+        }
+
+        for (Recipe recipe  : recipeList) {
+            System.out.println(recipe.getName());
+        }
+
+
         List<Ingredient> shoppingList = calculateIngredientsFromRecipes(recipesTotalQuantity);
 
         MarketShoppingList marketShoppingList = new MarketShoppingList();
         marketShoppingList.setStart(LocalDate.parse(startDate));
         marketShoppingList.setEnd(LocalDate.parse(endDate));
         marketShoppingList.setShoppingList(shoppingList);
+        marketShoppingList.setRecipes(recipeList);
         marketShoppingList.setOwnerUsername(username);
+
+
 
         marketShoppingList = shoppingListRepository.save(marketShoppingList);
 
@@ -138,12 +157,21 @@ public class RecipeCalendarServiceImpl implements RecipeCalendarService {
         return marketShoppingLists.stream().map(this::convertShoppingListToDTO).collect(Collectors.toList());
     }
 
+    @Override
+    @Transactional
+    public void deleteShoppingListById(UUID id, String username) {
+        shoppingListRepository.deleteById(id);
+    }
+
+
+    // PRIVATE METHODS
     private MarketShoppingListResponseDTO convertShoppingListToDTO(MarketShoppingList marketShoppingList) {
         MarketShoppingListResponseDTO dto = new MarketShoppingListResponseDTO();
         dto.setId(marketShoppingList.getId());
         dto.setStartDate(marketShoppingList.getStart().toString());
         dto.setEndDate(marketShoppingList.getEnd().toString());
         dto.setShoppingList(marketShoppingList.getShoppingList());
+        dto.setRecipeList((List<Recipe>) marketShoppingList.getRecipes());
 
         return dto;
     }
@@ -206,7 +234,6 @@ public class RecipeCalendarServiceImpl implements RecipeCalendarService {
                     }
                 }
             }
-
         }
         return new ArrayList<>(ingredientMap.values());
     }

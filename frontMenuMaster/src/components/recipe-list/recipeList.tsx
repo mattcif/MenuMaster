@@ -10,24 +10,14 @@ import ShoppingListInterval from '../shopping-list-interval/ShoppingListInterval
 
 export function RecipeList() {
   const { data } = useRecipeData();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isIntervalOpen, setIsIntervalOpen] = useState(false);
   const [selectedRecipeId, setSelectedRecipeId] = useState<string | null>(null);
 
-
-
-
-  const handleOpenModal = () => {
-    setIsModalOpen(prev => !prev);
-  };
-
+  
   const handleOpenDeleteModal = (recipeId: string) => {
     setSelectedRecipeId(recipeId);
   };
 
-  const handleCloseDeleteModal = () => {
-    setSelectedRecipeId(null);
-  };
+
 
   const truncateText = (text: string, maxLength: number) => {
     if (text.length > maxLength) {
@@ -36,26 +26,11 @@ export function RecipeList() {
     return text;
   };
 
-  const closeInterval = () => {
-    setIsIntervalOpen(false);
-  };
 
 
   return (
-    <div className="container">
-        <RecipeCalendar/>
+    <div className="container custom-font">
 
-        <div>
-      <button onClick={() => setIsIntervalOpen(true)}>Abrir Intervalo de Datas</button>
-      {isIntervalOpen && (
-        <ShoppingListInterval 
-          onIntervalSelect={(startDate, endDate) => {
-            console.log('Intervalo Selecionado:', startDate, endDate);
-          }} 
-          closeInterval={closeInterval} // Passa a função corretamente aqui
-        />
-      )}
-    </div>
 
       <h1>Receitas</h1>
       <div className='card-grid'>
@@ -70,14 +45,7 @@ export function RecipeList() {
           />
         )}
       </div>
-      {isModalOpen && <CreateModal closeModal={handleOpenModal} />}
-      {selectedRecipeId && (
-        <DeleteRecipe 
-          recipeId={selectedRecipeId} 
-          closeModal={handleCloseDeleteModal} 
-        />
-      )}
-      <button className="newIngredientbtn" onClick={handleOpenModal}>Novo</button>
+
     </div>
   );
 }

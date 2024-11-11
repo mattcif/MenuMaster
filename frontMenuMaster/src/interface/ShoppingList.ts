@@ -6,6 +6,6 @@ export interface ShoppingList {
     startDate: string
     endDate: string
     shoppingList: Ingredient[]
-    recipes: RecipeData
+    recipeList: RecipeData[]
 
 }

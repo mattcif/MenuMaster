@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import api from "../services/api";
 
 const deleteShoppingList = async (shoppingListId: string) => {
-    const response = await api.delete(`/shopping-list/${shoppingListId}`);
+    const response = await api.delete(`/calendar/shopping-list/${shoppingListId}`);
     return response.data;
 }
 

@@ -89,7 +89,7 @@ public class RecipeCalendarServiceImpl implements RecipeCalendarService {
 
     @Override
     @Transactional
-    public void createShoppingList(String startDate, String endDate, String username) {
+    public String createShoppingList(String startDate, String endDate, String username) {
         Map<Recipe, RecipeCalendarRequestDTO> recipesMap = new HashMap<>();
 
         List<RecipeCalendarRequestDTO> filteredList = filteredRecipesByDate(startDate, endDate);
@@ -116,7 +116,9 @@ public class RecipeCalendarServiceImpl implements RecipeCalendarService {
         marketShoppingList.setShoppingList(shoppingList);
         marketShoppingList.setOwnerUsername(username);
 
-        shoppingListRepository.save(marketShoppingList);
+        marketShoppingList = shoppingListRepository.save(marketShoppingList);
+
+        return marketShoppingList.getId().toString();
 
     }
 

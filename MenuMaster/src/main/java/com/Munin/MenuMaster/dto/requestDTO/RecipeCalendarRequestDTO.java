@@ -11,6 +11,4 @@ public class RecipeCalendarRequestDTO {
     private UUID recipeId;
     private List<String> dates;
     private Integer quantity;
-
-
 }

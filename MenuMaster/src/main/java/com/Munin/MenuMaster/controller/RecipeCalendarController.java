@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/calendar")
@@ -56,8 +57,8 @@ public class RecipeCalendarController {
         try {
             String startDate = shoppingListRequestDTO.getStartDate();
             String endDate = shoppingListRequestDTO.getEndDate();
-            recipeCalendarService.createShoppingList(startDate, endDate, username);
-            return new ResponseEntity<>("Market Shopping List Created Successfully", HttpStatus.CREATED);
+            String marketShoppingListId = recipeCalendarService.createShoppingList(startDate, endDate, username);
+            return new ResponseEntity<>(marketShoppingListId, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>("Error processing Market Shopping List", HttpStatus.BAD_REQUEST);
         }

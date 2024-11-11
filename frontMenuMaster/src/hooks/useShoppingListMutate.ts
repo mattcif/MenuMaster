@@ -4,11 +4,10 @@ import { ShoppingListToSave } from '../interface/ShoppingListToSave';
 
 const API_URL = '/calendar/shopping-list/create';
 
-// Função para enviar os dados via POST
 const postData = async (data: ShoppingListToSave) => {
     try {
-        const response = await api.post(API_URL, data); // Usando o método POST do api.js
-        return response.data; // Retornando os dados da resposta
+        const response = await api.post(API_URL, data); 
+        return response.data; 
     } catch (error: any) {
         if (error.response) {
             // Caso haja uma resposta do servidor
@@ -32,8 +31,9 @@ export function useShoppingListMutate() {
     const mutate = useMutation({
         mutationFn: postData,
         retry: 2, // Tentativas em caso de falha
-        onSuccess: () => {
-            queryClient.invalidateQueries(['shopping-data']); // Invalida a consulta após a mutação
+        onSuccess: (data) => {
+            queryClient.invalidateQueries(['shopping-data']); 
+            return data;
         }
     });
 

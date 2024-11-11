@@ -4,6 +4,7 @@ import DatePicker, { DateObject } from 'react-multi-date-picker';
 import { useShoppingListMutate } from '../../hooks/useShoppingListMutate';
 import { ShoppingListToSave } from '../../interface/ShoppingListToSave';
 import './shopping-list-interval-btn.css';
+import { useNavigate } from 'react-router-dom';
 
 interface ShoppingListIntervalBtnProps {
 }
@@ -13,7 +14,10 @@ export const ShoppingListIntervalBtn: React.FC<ShoppingListIntervalBtnProps> = (
     const [isSuccessfullyCreated, setIsSuccessfullyCreated] = useState(false);
     const [startDate, setStartDate] = useState<DateObject | null>(null);
     const [endDate, setEndDate] = useState<DateObject | null>(null);
-    const { mutate, isSuccess } = useShoppingListMutate();
+    const [shoppingListId, setShoppingListId] = useState<string | null>(null);
+    const { mutate, isSuccess, data } = useShoppingListMutate();
+    const navigate = useNavigate();
+
 
     const toggleContentVisibility = () => {
         setIsContentVisible(!isContentVisible);
@@ -31,9 +35,16 @@ export const ShoppingListIntervalBtn: React.FC<ShoppingListIntervalBtnProps> = (
         }
     };
 
+    const handleViewShoppingListClick = () => {
+        if (shoppingListId) {
+            navigate(`/shopping-list/${shoppingListId}`);
+        }
+    }
+
     useEffect(() => {
         if (isSuccess) {
-            setIsSuccessfullyCreated(true);  // Marca o sucesso de criação da lista
+            setIsSuccessfullyCreated(true);  
+            setShoppingListId(data)
         }
     }, [isSuccess]);
 
@@ -91,7 +102,7 @@ export const ShoppingListIntervalBtn: React.FC<ShoppingListIntervalBtnProps> = (
                             </Button>
                         )}
                         {isSuccessfullyCreated && (
-                            <Button className="mt-3" onClick={handleGenerateShoppingClick}>
+                            <Button className="mt-3" onClick={handleViewShoppingListClick}>
                                 Ver Lista de Compras
                             </Button>
                         )}

@@ -1,35 +1,28 @@
 import { useState } from "react";
 import { Ingredient } from "../../interface/Ingredient";
-import "./ingredientList.css"
+import styles from './IngredientList.module.css';
 
 interface IngredientListProps {
     ingredients: Ingredient[];
     onEdit: (index: number) => void;
     onSave: (index: number, updatedIngredient: Ingredient) => void;
     onDelete: (index: number) => void;
-}
-
-interface IngredientListProps {
-    ingredients: Ingredient[];
-    onEdit: (index: number) => void;
-    onSave: (index: number, updatedIngredient: Ingredient) => void; // Passa o ingrediente atualizado ao salvar
-    onDelete: (index: number) => void;
-    hideButtons?: boolean
+    hideButtons?: boolean;
 }
 
 export function IngredientList({ ingredients, onEdit, onSave, onDelete, hideButtons = false }: IngredientListProps) {
     const [editingIndex, setEditingIndex] = useState<number | null>(null);
-    const [editedIngredient, setEditedIngredient] = useState<Ingredient | null>(null); // Estado para o ingrediente editado
+    const [editedIngredient, setEditedIngredient] = useState<Ingredient | null>(null);
 
     const handleEditClick = (index: number) => {
         if (editingIndex === index) {
             if (editedIngredient) {
                 onSave(index, editedIngredient);
             }
-            setEditingIndex(null); // Volta o botão para "Editar" (verde)
+            setEditingIndex(null);
         } else {
             setEditingIndex(index);
-            setEditedIngredient(ingredients[index]); // Inicializa o estado com o ingrediente atual
+            setEditedIngredient(ingredients[index]);
             onEdit(index);
         }
     };
@@ -44,62 +37,54 @@ export function IngredientList({ ingredients, onEdit, onSave, onDelete, hideButt
     };
 
     return (
-        <div className="ingredient-list-container">
+        <div className={styles.ingredientListContainer}>
             <ul>
                 {ingredients.map((ingredient, index) => (
-                    <li key={index} className="ingredient-item">
-                        <div className="ingredient-info">
+                    <li key={index} className={styles.ingredientItem}>
+                        <div className={styles.ingredientInfo}>
                             {editingIndex === index ? (
                                 <>
-                                    {/* Campo para editar quantidade */}
                                     <input 
                                         type="number"
                                         value={editedIngredient?.quantity || ''}
                                         onChange={(e) => handleChange('quantity', Number(e.target.value))}
-                                        className="edit-ingredient-quantity"
+                                        className={styles.editIngredientQuantity}
                                     />
-
-                                    {/* Campo para selecionar o tipo de quantidade */}
                                     <select 
                                         value={editedIngredient?.typeQuantity} 
                                         onChange={(e) => handleChange('typeQuantity', e.target.value as "G" | "ML" | "UNIT")}
-                                        className="edit-ingredient-typeQuantity"
+                                        className={styles.editIngredientTypeQuantity}
                                     >
                                         <option value="G">Grams (g)</option>
                                         <option value="ML">Milliliters (ml)</option>
                                         <option value="UNIT">Units</option>
                                     </select>
-
-                                    {/* Campo para editar o nome do ingrediente */}
                                     <input 
                                         type="text"
                                         value={editedIngredient?.name || ''}
                                         onChange={(e) => handleChange('name', e.target.value)}
-                                        className="edit-ingredient-name"
+                                        className={styles.editIngredientName}
                                     />
                                 </>
                             ) : (
                                 <>
-                                    {/* Exibição normal dos ingredientes */}
-                                    <span className="ingredient-quantity">{ingredient.quantity} {ingredient.typeQuantity}</span>
-                                    <span className="ingredient-name">{ingredient.name}</span>
+                                    <span className={styles.ingredientQuantity}>{ingredient.quantity} {ingredient.typeQuantity}</span>
+                                    <span className={styles.ingredientName}>{ingredient.name}</span>
                                 </>
                             )}
                         </div>
-                        
+
                         {!hideButtons && (
-                            <div className="ingredient-actions">
-                                {/* Botão de editar ou salvar */}
+                            <div className={styles.ingredientActions}>
                                 <button 
                                     onClick={() => handleEditClick(index)} 
-                                    className={editingIndex === index ? "save-button" : "edit-button"}
+                                    className={editingIndex === index ? styles.saveButton : styles.editButton}
                                 >
                                     {editingIndex === index ? "Salvar" : "Editar"}
                                 </button>
-                                {/* Botão de excluir, desabilitado se estiver no modo de edição */}
                                 <button 
                                     onClick={() => onDelete(index)} 
-                                    className={editingIndex === index ? "delete-button save-button" : "delete-button"}
+                                    className={editingIndex === index ? `${styles.deleteButton} ${styles.saveButton}` : styles.deleteButton}
                                     disabled={editingIndex === index}
                                 >
                                     Excluir

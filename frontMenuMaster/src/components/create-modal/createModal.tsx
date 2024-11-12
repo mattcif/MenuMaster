@@ -1,10 +1,9 @@
-// CreateModal.tsx
 import { useEffect, useState } from "react";
 import { useRecipeDataMutate } from "../../hooks/useRecipeDataMutate";
 import { RecipeData } from "../../interface/RecipeData";
 import { Ingredient } from "../../interface/Ingredient";
 import InputIngredient from "./InputIngredient";
-import "./modal.css";
+import styles from "./modal.module.css"; // Importando o módulo CSS
 
 interface InputProps {
   label: string;
@@ -48,22 +47,22 @@ export function CreateModal({ closeModal }: ModalProps) {
   }, [isSuccess, closeModal]);
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-body">
-        <div className="modal-header">
+    <div className={styles.modalOverlay}>
+      <div className={styles.modalBody}>
+        <div className={styles.modalHeader}>
           <h2>Cadastre uma nova Receita</h2>
-          <button className="close-button" onClick={closeModal}>
+          <button className={styles.closeButton} onClick={closeModal}>
             X
           </button>
         </div>
 
-        <form className="input-container" action="">
+        <form className={styles.inputContainer} action="">
           <Input label="title" value={name} updateValue={setName} />
           <Input label="preparation method" value={preparationMethod} updateValue={setPreparationMethod} />
           <Input label="image" value={image} updateValue={setImage} />
           <InputIngredient ingredients={ingredients} setIngredients={setIngredients} />
         </form>
-        <button className="btn-secondery" type="button" onClick={submit}>
+        <button className={styles.btnSecondary} type="button" onClick={submit}>
           Submit
         </button>
       </div>

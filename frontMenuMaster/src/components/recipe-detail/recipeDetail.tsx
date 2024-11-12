@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import { useRecipeDataDetails } from "../../hooks/useRecipeDataDetails";
 import { IngredientList } from '../../components/ingredient-list/IngredientList'; 
-import './recipeDetail.css';
+import styles from './recipeDetail.module.css'; // Modifique a importação para usar CSS Modules
 import { AddIngredient } from '../add-ingredient/addIngredient';
 import { Ingredient } from '../../interface/Ingredient';
 import { useRecipeUpdate } from '../../hooks/useRecipeUpdate';
@@ -35,8 +35,6 @@ export function RecipeDetail() {
         const updatedIngredients = [...ingredients];
         updatedIngredients[index] = updatedIngredient;
         setIngredients(updatedIngredients);
-
-
     };
 
     const handleDeleteIngredient = (index: number) => {
@@ -54,7 +52,7 @@ export function RecipeDetail() {
     };
 
     const handleSaveClick = () => {
-        const updatedRecipe : RecipeData = {
+        const updatedRecipe: RecipeData = {
             id: id as string,
             name: editedName,
             image: editedImage,
@@ -65,7 +63,6 @@ export function RecipeDetail() {
             onSuccess: () => {
                 refetch();
                 setIsEditing(false);
-                
             }
         });
     };
@@ -74,35 +71,35 @@ export function RecipeDetail() {
     if (error) return <p>Erro ao carregar detalhes da receita</p>;
 
     return (
-        <div className="container">
-            <button className="edit-save-button" onClick={isEditing ? handleSaveClick : handleEditClick}>
+        <div className={styles.container}>
+            <button className={styles.editSaveButton} onClick={isEditing ? handleSaveClick : handleEditClick}>
                 {isEditing ? 'Salvar' : 'Editar'}
             </button>
-            <div className="recipe-card-container">
+            <div className={styles.recipeCardContainer}>
                 {isEditing ? (
                     <>
                         <input 
                             type="text"
                             value={editedName}
                             onChange={(e) => setEditedName(e.target.value)}
-                            className="edit-recipe-name"
+                            className={styles.editRecipeName}
                         />
                         <input 
                             type="text"
                             value={editedImage}
                             onChange={(e) => setEditedImage(e.target.value)}
-                            className="edit-recipe-image"
+                            className={styles.editRecipeImage}
                         />
                         <textarea
                             value={editedPreparationMethod}
                             onChange={(e) => setEditedPreparationMethod(e.target.value)}
-                            className="edit-recipe-method"
+                            className={styles.editRecipeMethod}
                         />
                     </>
                 ) : (
                     <>
                         <h1>{recipe?.name}</h1>
-                        <div className="img-container">
+                        <div className={styles.imgContainer}>
                             {recipe?.image ? (
                                 <img src={recipe.image} alt={recipe.name} />
                             ) : (
@@ -115,7 +112,7 @@ export function RecipeDetail() {
                 )}
             </div>
 
-            <div className="ingredients-container">
+            <div className={styles.ingredientsContainer}>
                 <h2>Ingredientes</h2>
                 {recipe?.ingredients && (
                     <IngredientList
@@ -126,7 +123,7 @@ export function RecipeDetail() {
                         hideButtons={!isEditing}
                     />
                 )}
-                <div className="add-ingredient">
+                <div className={styles.addIngredient}>
                     <button onClick={() => setIsAdding(!isAddingIngredients)}>
                         {isAddingIngredients ? 'Cancelar' : 'Adicionar Ingrediente'}
                     </button>
@@ -137,8 +134,8 @@ export function RecipeDetail() {
                         />
                     )}
                 </div>
-                {isError && <p>Error updating recipe</p>}
-                {isUpdating && <p>Updating recipe...</p>}
+                {isError && <p>Erro ao atualizar a receita</p>}
+                {isUpdating && <p>Atualizando receita...</p>}
             </div>
         </div>
     );

@@ -1,5 +1,4 @@
-/* modal.css */
-.modal-overlay {
+.modalOverlay {
     position: fixed;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.4);
@@ -12,7 +11,7 @@
     z-index: 999;
 }
 
-.modal-overlay .modal-body {
+.modalBody {
     background-color: white;
     padding: 2rem; /* Ajuste de padding para maior controle */
     height: 80vh; /* Ocupa 80% da altura da tela */
@@ -26,16 +25,16 @@
     overflow-y: auto; /* Permite rolagem interna, se necessário */
 }
 
-.modal-overlay .modal-body h2 {
+.modalBody h2 {
     font-size: 32px;
     margin: 0;
 }
 
-.modal-overlay .modal-body .input-container {
+.inputContainer {
     width: 100%;
 }
 
-.modal-overlay .modal-body input {
+.modalBody input {
     padding: 12px;
     border: 2px solid #c6c5c5;
     color: rgba(0, 0, 0, 0.9);
@@ -47,14 +46,14 @@
     box-sizing: border-box;
 }
 
-.modal-overlay .modal-body label {
+.modalBody label {
     color: #242424;
     font-weight: 600;
     margin-bottom: 8px;
     font-size: 18px;
 }
 
-.modal-overlay .modal-body .btn-secondery {
+.btnSecondary {
     width: 100%;
     margin-top: 16px;
     padding: 12px;
@@ -66,19 +65,19 @@
     text-align: center;
 }
 
-.modal-overlay .modal-body .btn-secondery:hover {
+.btnSecondary:hover {
     background-color: #2a34d8;
     transform: scale(1.02);
 }
 
-.modal-overlay .modal-body .modal-header {
+.modalHeader {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.modal-overlay .modal-body .modal-header button {
+.modalHeader button {
     padding: 8px;
     background-color: transparent;
     border: none;

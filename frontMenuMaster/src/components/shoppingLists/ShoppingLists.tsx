@@ -1,3 +1,4 @@
+import { Container } from "react-bootstrap";
 import { useShoppingList } from "../../hooks/useShoppingList";
 import { CardShoppingList } from "../card-shopping-list/CardShoppingList";
 
@@ -7,7 +8,7 @@ export function ShoppingLists() {
     console.log("Shopping List Data:", data)
 
     return (
-        <div className="container">
+        <Container className="shoppinglist-container">
             <div className="card-shopping-list">
                 {data?.map((shoppingLists) => 
                     <CardShoppingList
@@ -15,9 +16,10 @@ export function ShoppingLists() {
                         id={shoppingLists.id}
                         startDate={shoppingLists.startDate}
                         endDate={shoppingLists.endDate}
-                        recipeList={shoppingLists.recipes}/>
+                        recipeList={shoppingLists.recipeList}/>
                 )}
             </div>
-        </div>
+        </Container>
+
     )
 }

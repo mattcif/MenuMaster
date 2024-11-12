@@ -3,11 +3,10 @@ import { Button, Col, Container, Row } from 'react-bootstrap';
 import DatePicker, { DateObject } from 'react-multi-date-picker';
 import { useShoppingListMutate } from '../../hooks/useShoppingListMutate';
 import { ShoppingListToSave } from '../../interface/ShoppingListToSave';
-import './shopping-list-interval-btn.css';
 import { useNavigate } from 'react-router-dom';
+import styles from './shoppingListIntervalBtn.module.css'; // Importando o módulo CSS
 
-interface ShoppingListIntervalBtnProps {
-}
+interface ShoppingListIntervalBtnProps {}
 
 export const ShoppingListIntervalBtn: React.FC<ShoppingListIntervalBtnProps> = () => {
     const [isContentVisible, setIsContentVisible] = useState(false);
@@ -17,7 +16,6 @@ export const ShoppingListIntervalBtn: React.FC<ShoppingListIntervalBtnProps> = (
     const [shoppingListId, setShoppingListId] = useState<string | null>(null);
     const { mutate, isSuccess, data } = useShoppingListMutate();
     const navigate = useNavigate();
-
 
     const toggleContentVisibility = () => {
         setIsContentVisible(!isContentVisible);
@@ -39,12 +37,12 @@ export const ShoppingListIntervalBtn: React.FC<ShoppingListIntervalBtnProps> = (
         if (shoppingListId) {
             navigate(`/shopping-list/${shoppingListId}`);
         }
-    }
+    };
 
     useEffect(() => {
         if (isSuccess) {
-            setIsSuccessfullyCreated(true);  
-            setShoppingListId(data)
+            setIsSuccessfullyCreated(true);
+            setShoppingListId(data);
         }
     }, [isSuccess]);
 
@@ -57,10 +55,10 @@ export const ShoppingListIntervalBtn: React.FC<ShoppingListIntervalBtnProps> = (
             )}
 
             {isContentVisible && (
-                <div className="shopping-list-select-interval-container">
-                    <button className="close-button" onClick={toggleContentVisibility}>✕</button>
+                <div className={styles.shoppingListSelectIntervalContainer}>
+                    <button className={styles.closeButton} onClick={toggleContentVisibility}>✕</button>
                     <h1 className="mb-4">Selecione o Intervalo para a Lista de Compras</h1>
-                    <div className="calendar-pickers-container">
+                    <div className={styles.calendarPickersContainer}>
                         <Container fluid>
                             <Row>
                                 <Col className="text-start">
@@ -74,7 +72,7 @@ export const ShoppingListIntervalBtn: React.FC<ShoppingListIntervalBtnProps> = (
                                         format="DD/MM/YYYY"
                                         weekDays={["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"]}
                                         months={["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]}
-                                        className="date-picker"
+                                        className={styles.datePicker}
                                     />
                                 </Col>
                             </Row>
@@ -90,7 +88,7 @@ export const ShoppingListIntervalBtn: React.FC<ShoppingListIntervalBtnProps> = (
                                         format="DD/MM/YYYY"
                                         weekDays={["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"]}
                                         months={["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"]}
-                                        className="date-picker"
+                                        className={styles.datePicker}
                                     />
                                 </Col>
                             </Row>

@@ -1,5 +1,4 @@
-/* Adicionando uma posição relativa ao contêiner para permitir o overflow */
-.shopping-list-select-interval-container {
+.shoppingListSelectIntervalContainer {
     overflow: visible; /* Permite que o conteúdo do DatePicker transborde */
     max-height: 60vh;
     width: 100%;
@@ -14,13 +13,13 @@
     z-index: 1000;
 }
 
-.date-picker {
+.datePicker {
     width: 100%;
     z-index: 1100;
 }
 
 /* Ajustando a exibição do calendário */
-.date-picker .rmdp-container {
+.datePicker .rmdpContainer {
     position: absolute;
     z-index: 2000; /* Eleva o calendário para um nível mais alto */
     top: 0; /* Garante que o calendário não seja cortado */

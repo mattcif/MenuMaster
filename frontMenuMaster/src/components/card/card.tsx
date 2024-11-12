@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./card.css";
+import styles from './card.module.css';
 import { useNavigate } from 'react-router-dom';
 import { Button, Container, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
@@ -21,7 +21,7 @@ export function Card({ id, name, preparationMethod, image, onDelete }: CardProps
 
     const handleDateSelect = (date: Date) => {
         alert(`Date selected: ${date.toDateString()}`);
-        setIsCalendarVisible(false);
+        setIsCalendarVisible(false); // Oculta o calendário após a seleção
     };
 
     const handleDetailClick = () => {
@@ -33,24 +33,20 @@ export function Card({ id, name, preparationMethod, image, onDelete }: CardProps
     };
 
     return (
-        <Container fluid className="d-flex justify-content-center align-items-center">
-            <div className="card">
-                <div className="img-container">
+        <Container className={styles.containerFluidRc}>
+            <div className={styles.cardRc}>
+                <div className={styles.imgContainerRc}>
                     <img src={image} alt={name} />
                 </div>
-                <div className="title-container truncate" >
-
-                    <OverlayTrigger
-                        placement="top"
-                        overlay={<Tooltip id="recipe-title-tooltip">{name}</Tooltip>}
-                    >
-                        <h3 className='truncate'>{name}</h3>
-
-                    </OverlayTrigger>
-                </div>
-                <div className="card-buttons">
+                <OverlayTrigger
+                    placement="top"
+                    overlay={<Tooltip id="recipe-title-tooltip">{name}</Tooltip>}
+                >
+                    <h3 className={styles.truncateRc}>{name}</h3>
+                </OverlayTrigger>
+                <div className={styles.cardButtonsRc}>
                     <Button onClick={handleDetailClick}>Ver mais</Button>
-                    <Button variant="danger" onClick={handleDeleteClick}>Excluir</Button>
+                    <Button variant='danger' onClick={handleDeleteClick}>Excluir</Button>
                 </div>
             </div>
         </Container>

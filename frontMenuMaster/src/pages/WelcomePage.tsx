@@ -12,7 +12,7 @@ interface WelcomeContentState { }
 export default class WelcomeContent extends React.Component<WelcomeContentProps, WelcomeContentState> {
   render() {
     return (
-      <Container fluid>
+      <Container>
         <section>
           <Row>
             <Col>

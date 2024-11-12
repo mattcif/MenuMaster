@@ -1,10 +1,9 @@
-.scroll-container {
+.scrollContainer {
     position: relative;
-    font-family: 'questrial';
+    font-family: 'questrial', sans-serif;
 }
 
-
-.scrollable-card-list {
+.scrollableCardList {
     max-height: calc(100vh - 120px);
     height: 80vh;
     min-width: 60vh;
@@ -19,20 +18,18 @@
     border-radius: 8px;
 }
 
-.scrollable-card-list h1 {
+.scrollableCardList h1 {
     justify-content: center;
     align-items: center;
-    font-style: bold;
+    font-weight: bold;
 }
 
-.fixed-search-bar {
+.fixedSearchBar {
     position: relative;
 }
 
-
-.scrollable-card-list>div {
+.scrollableCardList > div {
     direction: ltr;
-
 }
 
 .card {
@@ -40,12 +37,10 @@
 }
 
 @media (max-width: 768px) {
-    .scrollable-card-list {
+    .scrollableCardList {
         max-width: 100vw;
         max-height: calc(100vh - 100px);
-        /* Altura menor para telas pequenas */
         padding: 5px 10px;
-        /* Reduzimos o padding em dispositivos menores */
     }
 
     .card {

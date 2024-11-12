@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import CardRecipeHomePage from '../card-recipe-homepage/CardRecipeHomePage';
 import { Col, Container, Row } from 'react-bootstrap';
-import './ScrollableCardList.css';
+import styles from './ScrollableCardList.module.css'; // Importando o módulo CSS
 import { useRecipeData } from '../../hooks/useRecipeData';
 import SearchBar from '../SearchBar/SearchBar';
+import CardRecipeHomePage from '../card-recipe-homepage/CardRecipeHomePage';
 
 interface CardRecipe {
     id: string;
     name: string;
     image?: string;
 }
-
 
 export function ScrollableCardList() {
     const { data: recipes, isLoading, isError } = useRecipeData();
@@ -19,52 +18,36 @@ export function ScrollableCardList() {
     if (isLoading) return <p>Loading...</p>;
     if (isError || !recipes) return <p>Failed to load recipes.</p>;
 
-
     const filteredRecipes = recipes.filter(recipe =>
         recipe.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
-
     return (
-        <Container fluid >
-
-            <div className="d-flex justify-content-center align-items-center scroll-container" style={{ }}>
+        <Container>
+            <div className={`${styles.scrollContainer}`}>
 
                 <Row>
                     <Col>
-                        <div className="fixed-search-bar">
+                        <div className={styles.fixedSearchBar}>
                             <SearchBar onSearch={setSearchTerm} />
-
                         </div>
 
-                        <div className="scrollable-card-list">
-
+                        <div className={styles.scrollableCardList}>
                             {filteredRecipes.length > 0 ? (
-                                filteredRecipes?.map(recipeData =>
+                                filteredRecipes.map(recipeData => (
                                     <CardRecipeHomePage
                                         key={recipeData.id}
                                         id={recipeData.id!}
                                         name={recipeData.name}
                                         image={recipeData.image} />
-                                )
-
+                                ))
                             ) : (
                                 <h1>Nenhuma Receita Encontrada :'</h1>
-                            )
-                            }
-
-
+                            )}
                         </div>
-
                     </Col>
                 </Row>
-
-
-
             </div>
-
-
         </Container>
     );
-};
-
+}

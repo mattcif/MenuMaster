@@ -1,18 +1,20 @@
-.card-container {
+/* CardStyles.module.css */
+
+.cardContainer {
     padding-top: 10px !important;
     justify-content: center !important;
     align-items: center !important;
 }
 
-.card-recipe {
+.cardRecipe {
     width: 100%;
     height: 250px;
     max-width: 750px !important; /* Define uma largura máxima para o card */
-    overflow: hidden !important; /* Evita o vazamento de conteúdo */
+    overflow: visible !important; /* Evita o vazamento de conteúdo */
     margin-bottom: 16px !important;
 }
 
-.recipe-image {
+.recipeImage {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -23,10 +25,10 @@
     max-width: 150px !important; /* Define uma largura máxima para evitar que ocupem muito espaço */
 }
 
-.recipe-title p  {
-    overflow: hidden;          /* Oculta o texto que excede o limite */
-    text-overflow: ellipsis;   /* Adiciona reticências (...) ao final */
-    max-width: 200px;           /* Limita a largura ao tamanho do contêiner */
+.recipeTitle p {
+    overflow: hidden; /* Oculta o texto que excede o limite */
+    text-overflow: ellipsis; /* Adiciona reticências (...) ao final */
+    max-width: 200px; /* Limita a largura ao tamanho do contêiner */
 }
 
 .truncate {
@@ -35,7 +37,7 @@
     text-overflow: ellipsis;
 }
 
-.cardContainer {
+.cardContainerFlex {
     display: flex;
     align-items: center;
 }

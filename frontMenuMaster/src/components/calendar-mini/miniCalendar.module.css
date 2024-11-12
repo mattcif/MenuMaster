@@ -1,0 +1,48 @@
+.miniCalendarContainer {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centraliza o modal */
+  width: 80%; /* Tamanho máximo do modal */
+  height: auto; /* Ajusta a altura automaticamente */
+  max-width: 600px; /* Limita a largura do modal */
+  max-height: 80vh; /* Limita a altura do modal para não ultrapassar a tela */
+  overflow: hidden; /* Evita que o conteúdo ultrapasse a área visível */
+  padding: 20px; /* Adiciona padding para um melhor espaçamento interno */
+}
+
+.miniCalendarHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 20px; /* Espaçamento inferior */
+}
+
+.toolbar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.datepickerContainer {
+  width: 100%; /* Garante que o calendário ocupe todo o espaço disponível */
+  max-width: 100%; /* Evita que o calendário ultrapasse o limite do modal */
+  overflow-x: auto; /* Garante que o calendário não "quebre" se for largo */
+}
+
+.cardButtonsMiniCalendar {
+  display: flex;
+  margin-top: 20px;
+  justify-content: end;
+  align-items: center;
+}
+
+button {
+  padding: 10px 20px;
+  margin-left: 10px;
+}

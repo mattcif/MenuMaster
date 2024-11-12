@@ -1,129 +1,124 @@
-/* ingredientList.css */
-
-.ingredient-list-container {
+.ingredientListContainer {
     width: 100%;
     margin-top: 10px;
-    background-color: #f9f9f9
-    
-}
-
-ul {
+    background-color: #f9f9f9;
+  }
+  
+  ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
-}
-
-.ingredient-item {
+  }
+  
+  .ingredientItem {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
     border-bottom: 1px solid #8b8b8b;
-}
-
-.ingredient-info {
+  }
+  
+  .ingredientInfo {
     display: flex;
     align-items: center;
-}
-
-.ingredient-quantity {
+  }
+  
+  .ingredientQuantity {
     margin-right: 10px;
     font-weight: bold;
-}
-
-.ingredient-name {
+  }
+  
+  .ingredientName {
     font-size: 1.1rem;
     color: #333;
-}
-
-.ingredient-actions {
+  }
+  
+  .ingredientActions {
     display: flex;
     gap: 10px;
-}
-
-.ingredient-info select {
+  }
+  
+  .ingredientInfo select {
     padding: 5px;
     border-radius: 5px;
     margin-right: 10px;
     cursor: pointer;
     font-size: 0.9rem;
-}
-
-.edit-button,
-.delete-button {
+  }
+  
+  .editButton,
+  .deleteButton {
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 0.9rem;
-}
-
-.edit-button {
+  }
+  
+  .editButton {
     background-color: #4caf50;
     color: white;
-}
-
-.save-button {
+  }
+  
+  .saveButton {
     background-color: #2196f3;
     color: white;
     font-weight: bold;
-}
-
-.delete-button {
+  }
+  
+  .deleteButton {
     background-color: #f44336; /* Vermelho padrão */
     color: white;
-}
-
-.save-button + .delete-button {
-    background-color: #808080; 
+  }
+  
+  .saveButton + .deleteButton {
+    background-color: #808080;
     cursor: not-allowed;
-    
-}
-
-.edit-button:hover,
-.save-button:hover,
-.delete-button:hover {
+  }
+  
+  .editButton:hover,
+  .saveButton:hover,
+  .deleteButton:hover {
     opacity: 0.8;
-}
-
-.edit-ingredient-quantity,
-.edit-ingredient-name,
-.edit-ingredient-type-quantity {
+  }
+  
+  .editIngredientQuantity,
+  .editIngredientName,
+  .editIngredientTypeQuantity {
     width: 80px;
     margin-right: 10px;
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 0.9rem;
-}
-
-.edit-ingredient-quantity:focus,
-.edit-ingredient-name:focus,
-.edit-ingredient-type-quantity:focus {
+  }
+  
+  .editIngredientQuantity:focus,
+  .editIngredientName:focus,
+  .editIngredientTypeQuantity:focus {
     outline: none;
     border-color: #4caf50;
-}
-
-
-@media (max-width: 600px) {
+  }
+  
+  @media (max-width: 600px) {
     .container {
-        padding: 10px;  
+      padding: 10px;
     }
-
+  
     h1 {
-        font-size: 2rem;
+      font-size: 2rem;
     }
-
+  
     h2 {
-        font-size: 1.5rem;
+      font-size: 1.5rem;
     }
-
+  
     p {
-        font-size: 1rem;
+      font-size: 1rem;
     }
-
-    .ingredients-container li {
-        font-size: 1rem;
+  
+    .ingredientsContainer li {
+      font-size: 1rem;
     }
-}
-
+  }
+  

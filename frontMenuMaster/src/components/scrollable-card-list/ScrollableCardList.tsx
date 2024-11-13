@@ -42,7 +42,7 @@ export function ScrollableCardList() {
                                         image={recipeData.image} />
                                 ))
                             ) : (
-                                <h1>Nenhuma Receita Encontrada :'</h1>
+                                <h1>Nenhuma Receita Encontrada</h1>
                             )}
                         </div>
                     </Col>

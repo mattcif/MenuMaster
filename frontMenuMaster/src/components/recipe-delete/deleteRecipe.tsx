@@ -1,34 +1,28 @@
 import React, { useEffect } from 'react';
-import { useRecipeDeleteMutate } from '../../hooks/useDeleteRecipe';
+import { Button } from 'react-bootstrap';
 import './delete-recipe.css';
 
 interface DeleteRecipeProps {
-    recipeId: string;
-    closeModal: () => void;
+    onConfirm: () => void;
+    onCancel: () => void;
+    isPending?: boolean;
+    isError?: boolean;
 }
 
-export function DeleteRecipe({ recipeId, closeModal }: DeleteRecipeProps) {
-    const { mutate, isPending, isError, isSuccess } = useRecipeDeleteMutate();
-
-    const handleDelete = () => {
-        mutate(recipeId);
-    };
-
-    useEffect(() => {
-        if (isSuccess) {
-            closeModal();
-        }
-    }, [isSuccess, closeModal]);
-
+export function DeleteRecipe({ onConfirm, onCancel, isPending = false, isError = false }: DeleteRecipeProps) {
     return (
         <div className="delete-recipe-overlay">
-            <div className="delete-recipe-body">
-                <h2>Are you sure you want to delete this recipe?</h2>
-                {isPending && <p>Deleting...</p>}
-                {isError && <p>Error occurred while deleting the recipe.</p>}
+            <div className="delete-recipe-modal">
+                <h2>Tem certeza de que deseja deletar esta receita?</h2>
+                {isPending && <p>Excluindo...</p>}
+                {isError && <p>Ocorreu um erro ao excluir a receita.</p>}
                 <div className="delete-recipe-buttons">
-                    <button onClick={handleDelete} disabled={isPending}>Yes, delete it</button>
-                    <button onClick={closeModal}>No, cancel</button>
+                    <Button variant="danger" onClick={onConfirm} disabled={isPending}>
+                        Sim, deletar
+                    </Button>
+                    <Button variant="secondary" onClick={onCancel}>
+                        Não, cancelar
+                    </Button>
                 </div>
             </div>
         </div>

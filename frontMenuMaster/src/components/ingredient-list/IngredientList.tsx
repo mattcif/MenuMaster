@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Ingredient } from "../../interface/Ingredient";
 import styles from './IngredientList.module.css';
+import { Button } from "react-bootstrap";
 
 interface IngredientListProps {
     ingredients: Ingredient[];
@@ -44,14 +45,14 @@ export function IngredientList({ ingredients, onEdit, onSave, onDelete, hideButt
                         <div className={styles.ingredientInfo}>
                             {editingIndex === index ? (
                                 <>
-                                    <input 
+                                    <input
                                         type="number"
                                         value={editedIngredient?.quantity || ''}
                                         onChange={(e) => handleChange('quantity', Number(e.target.value))}
                                         className={styles.editIngredientQuantity}
                                     />
-                                    <select 
-                                        value={editedIngredient?.typeQuantity} 
+                                    <select
+                                        value={editedIngredient?.typeQuantity}
                                         onChange={(e) => handleChange('typeQuantity', e.target.value as "G" | "ML" | "UNIT")}
                                         className={styles.editIngredientTypeQuantity}
                                     >
@@ -59,7 +60,7 @@ export function IngredientList({ ingredients, onEdit, onSave, onDelete, hideButt
                                         <option value="ML">Milliliters (ml)</option>
                                         <option value="UNIT">Units</option>
                                     </select>
-                                    <input 
+                                    <input
                                         type="text"
                                         value={editedIngredient?.name || ''}
                                         onChange={(e) => handleChange('name', e.target.value)}
@@ -76,14 +77,31 @@ export function IngredientList({ ingredients, onEdit, onSave, onDelete, hideButt
 
                         {!hideButtons && (
                             <div className={styles.ingredientActions}>
-                                <button 
-                                    onClick={() => handleEditClick(index)} 
+                                {/* {editingIndex ? (
+                                    <>
+                                        <Button
+                                            onClick={() => handleEditClick(index)}>
+                                                Salvar
+
+                                        </Button>
+                                    </>
+                                ) : (
+                                    <>
+
+                                    </>
+                                )
+                                } */}
+
+
+
+                                <button
+                                    onClick={() => handleEditClick(index)}
                                     className={editingIndex === index ? styles.saveButton : styles.editButton}
                                 >
                                     {editingIndex === index ? "Salvar" : "Editar"}
                                 </button>
-                                <button 
-                                    onClick={() => onDelete(index)} 
+                                <button
+                                    onClick={() => onDelete(index)}
                                     className={editingIndex === index ? `${styles.deleteButton} ${styles.saveButton}` : styles.deleteButton}
                                     disabled={editingIndex === index}
                                 >

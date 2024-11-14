@@ -47,7 +47,8 @@
   }
   
   .editButton,
-  .deleteButton {
+  .deleteButton,
+  .saveButton {
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
@@ -63,7 +64,6 @@
   .saveButton {
     background-color: #2196f3;
     color: white;
-    font-weight: bold;
   }
   
   .deleteButton {

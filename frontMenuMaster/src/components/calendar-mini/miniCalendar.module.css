@@ -11,7 +11,6 @@
   height: auto; /* Ajusta a altura automaticamente */
   max-width: 600px; /* Limita a largura do modal */
   max-height: 80vh; /* Limita a altura do modal para não ultrapassar a tela */
-  overflow: hidden; /* Evita que o conteúdo ultrapasse a área visível */
   padding: 20px; /* Adiciona padding para um melhor espaçamento interno */
 }
 

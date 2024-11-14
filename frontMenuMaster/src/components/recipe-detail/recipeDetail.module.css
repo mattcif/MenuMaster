@@ -2,38 +2,47 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    font-family: Arial, sans-serif;
     color: #333;
 }
 
-.imgContainer {
-    /* Estilo de container da imagem, se necessário */
-}
-
-h1 {
-    font-size: 2.5rem;
-    color: #4a90e2;
+.container h1 {
+    font-size: 3rem;
     text-align: center;
     margin-bottom: 20px;
 }
 
-img {
+.container h2 {
+    font-size: 1.8rem;
+    color: #4a90e2;
+    margin-bottom: 10px;
+}
+
+.container img {
     width: 100%;
     height: auto;
     border-radius: 10px;
     margin-bottom: 20px;
 }
 
-h2 {
-    font-size: 1.8rem;
-    color: #4a90e2;
-    margin-bottom: 10px;
-}
-
-p {
+.container p {
     font-size: 1.2rem;
     line-height: 1.6;
     margin-bottom: 20px;
+}
+
+.imgContainer {
+    width: 100%; /* A imagem ocupa 100% da largura do contêiner */
+    height: 100%; /* A imagem ocupa 100% da altura do contêiner */
+    object-fit: cover; /* A imagem cobre a área sem distorção */
+    border-radius: 8px; /* Bordas arredondadas na imagem */
+}
+
+.preparationMethodContainer {
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    width: 100%;
+    border-radius: 10px;
 }
 
 .ingredientsContainer {
@@ -65,7 +74,7 @@ p {
     border-radius: 5px;
     cursor: pointer;
     font-size: 0.9rem;
-    background-color: #7caf4c;
+    background-color: #7caf4c !;
     color: white;
 }
 

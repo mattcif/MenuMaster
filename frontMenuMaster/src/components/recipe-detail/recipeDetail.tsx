@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import { useRecipeDataDetails } from "../../hooks/useRecipeDataDetails";
-import { IngredientList } from '../../components/ingredient-list/IngredientList'; 
+import { IngredientList } from '../../components/ingredient-list/IngredientList';
 import styles from './recipeDetail.module.css'; // Modifique a importação para usar CSS Modules
 import { AddIngredient } from '../add-ingredient/addIngredient';
 import { Ingredient } from '../../interface/Ingredient';
 import { useRecipeUpdate } from '../../hooks/useRecipeUpdate';
 import { RecipeData } from '../../interface/RecipeData';
+import { Button, Container } from 'react-bootstrap';
 
 export function RecipeDetail() {
     const { id } = useParams<{ id: string }>();
@@ -71,72 +72,81 @@ export function RecipeDetail() {
     if (error) return <p>Erro ao carregar detalhes da receita</p>;
 
     return (
-        <div className={styles.container}>
-            <button className={styles.editSaveButton} onClick={isEditing ? handleSaveClick : handleEditClick}>
-                {isEditing ? 'Salvar' : 'Editar'}
-            </button>
-            <div className={styles.recipeCardContainer}>
-                {isEditing ? (
-                    <>
-                        <input 
-                            type="text"
-                            value={editedName}
-                            onChange={(e) => setEditedName(e.target.value)}
-                            className={styles.editRecipeName}
-                        />
-                        <input 
-                            type="text"
-                            value={editedImage}
-                            onChange={(e) => setEditedImage(e.target.value)}
-                            className={styles.editRecipeImage}
-                        />
-                        <textarea
-                            value={editedPreparationMethod}
-                            onChange={(e) => setEditedPreparationMethod(e.target.value)}
-                            className={styles.editRecipeMethod}
-                        />
-                    </>
-                ) : (
-                    <>
-                        <h1>{recipe?.name}</h1>
-                        <div className={styles.imgContainer}>
-                            {recipe?.image ? (
-                                <img src={recipe.image} alt={recipe.name} />
-                            ) : (
-                                <p>Imagem não disponível.</p>
-                            )}
-                        </div>
-                        <h2>Modo de Preparo</h2>
-                        <p>{recipe?.preparationMethod}</p>
-                    </>
-                )}
-            </div>
+        <Container className='custom-font'>
+            <div className={styles.container}>
+                <button className={styles.editSaveButton} onClick={isEditing ? handleSaveClick : handleEditClick}>
+                    {isEditing ? 'Salvar' : 'Editar'}
+                </button>
+                <div className={styles.recipeCardContainer}>
+                    {isEditing ? (
+                        <>
+                            <input
+                                type="text"
+                                value={editedName}
+                                onChange={(e) => setEditedName(e.target.value)}
+                                className={styles.editRecipeName}
+                            />
+                            <input
+                                type="text"
+                                value={editedImage}
+                                onChange={(e) => setEditedImage(e.target.value)}
+                                className={styles.editRecipeImage}
+                            />
+                            <textarea
+                                value={editedPreparationMethod}
+                                onChange={(e) => setEditedPreparationMethod(e.target.value)}
+                                className={styles.editRecipeMethod}
+                            />
+                        </>
+                    ) : (
+                        <>
+                            <h1>{recipe?.name}</h1>
+                            <div className={styles.imgContainer}>
+                                {recipe?.image ? (
+                                    <img src={recipe.image} alt={recipe.name} />
+                                ) : (
+                                    <p>Imagem não disponível.</p>
+                                )}
+                            </div>
+                            <h2>Modo de Preparo</h2>
+                            <div className={styles.preparationMethodContainer}>
+                                <p>{recipe?.preparationMethod}</p>
 
-            <div className={styles.ingredientsContainer}>
-                <h2>Ingredientes</h2>
-                {recipe?.ingredients && (
-                    <IngredientList
-                        ingredients={ingredients}
-                        onEdit={handleEditIngredient}
-                        onSave={handleSaveIngredient}
-                        onDelete={handleDeleteIngredient}
-                        hideButtons={!isEditing}
-                    />
-                )}
-                <div className={styles.addIngredient}>
-                    <button onClick={() => setIsAdding(!isAddingIngredients)}>
-                        {isAddingIngredients ? 'Cancelar' : 'Adicionar Ingrediente'}
-                    </button>
-                    {isAddingIngredients && (
-                        <AddIngredient
-                            recipeId={id as string}
-                            onIngredientAdded={handleAddIngredient}
-                        />
+                            </div>
+
+                        </>
                     )}
                 </div>
-                {isError && <p>Erro ao atualizar a receita</p>}
-                {isUpdating && <p>Atualizando receita...</p>}
+
+                <div className={styles.ingredientsContainer}>
+                    <h2>Ingredientes</h2>
+                    {recipe?.ingredients && (
+                        <IngredientList
+                            ingredients={ingredients}
+                            onEdit={handleEditIngredient}
+                            onSave={handleSaveIngredient}
+                            onDelete={handleDeleteIngredient}
+                            hideButtons={!isEditing}
+                        />
+                    )}
+                    <div className={styles.addIngredient}>
+                        <Button variant='success' onClick={() => setIsAdding(!isAddingIngredients)}>
+                            {isAddingIngredients ? 'Cancelar' : 'Adicionar Ingrediente'}
+
+                        </Button>
+
+                        {isAddingIngredients && (
+                            <AddIngredient
+                                recipeId={id as string}
+                                onIngredientAdded={handleAddIngredient}
+                            />
+                        )}
+                    </div>
+                    {isError && <p>Erro ao atualizar a receita</p>}
+                    {isUpdating && <p>Atualizando receita...</p>}
+                </div>
             </div>
-        </div>
+        </Container>
+
     );
 }

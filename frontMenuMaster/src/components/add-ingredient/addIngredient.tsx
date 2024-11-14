@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAddIngredient } from '../../hooks/useAddIngredient';
 import { Ingredient } from '../../interface/Ingredient';
+import { Button, FloatingLabel, Form } from 'react-bootstrap';
 
 interface AddIngredientProps {
     recipeId: string;
@@ -28,31 +29,52 @@ export function AddIngredient({ recipeId, onIngredientAdded }: AddIngredientProp
         }
     };
 
+    const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newValue = Number(e.target.value);
+        if (newValue >= 1 && newValue <= 10) {
+            setQuantity(newValue);
+        }
+    };
+
     return (
-        <div>
-            <input
-                type="text"
-                value={ingredientName}
-                onChange={(e) => setIngredientName(e.target.value)}
-                placeholder="Ingredient Name"
-            />
-            <input
-                type="number"
-                value={quantity}
-                onChange={(e) => setQuantity(Number(e.target.value))}
-                placeholder="Quantity"
-            />
-            <select
-                value={typeQuantity}
-                onChange={(e) => setTypeQuantity(e.target.value as 'G' | 'ML' | 'UNIT')}
+        <div className='d-flex justify-content-center- alignt-items-center' style={{marginTop: '5px'}}>
+            <FloatingLabel
+                controlId="floatingInput"
+                label="Nome do Ingrendiente"
+                className="mb-3"
             >
-                <option value="G">Grams (g)</option>
-                <option value="ML">Milliliters (ml)</option>
-                <option value="UNIT">Units</option>
-            </select>
-            <button onClick={handleAddIngredient} disabled={isPending}>
-                Add Ingredient
-            </button>
+                <Form.Control  type="text" placeholder="Nome do Ingrendiente" value={ingredientName} onChange={(e) => setIngredientName(e.target.value)} />
+            </FloatingLabel>
+
+            <Form.Group className="mb-3" style={{ width: '10vw', height: '1vh', backgroundColor: '#f8f9fa' }}>
+                <Form.Floating>
+                    <Form.Control
+                        as="input"
+                        type="number"
+                        id="typeNumber"
+                        min={1}
+                        placeholder="Selecione a quantidade"
+                        required
+                        value={quantity}
+                        onChange={handleQuantityChange}
+                    />
+                    <Form.Label htmlFor="typeNumber">Quantidade</Form.Label>
+                </Form.Floating>
+            </Form.Group>
+
+            <Form.Select 
+            style={{ width:'150px', height:'59px'}}
+            value={typeQuantity}
+            onChange={(e) => setTypeQuantity(e.target.value as 'G' | 'ML' | 'UNIT')}
+            aria-label="Default select example">
+                <option value="G">Gramas (g)</option>
+                <option value="ML">Milimetros (ml)</option>
+                <option value="UNIT">Unidade</option>
+            </Form.Select>
+
+
+            <Button style={{ width:'150px', height:'59px'}} onClick={handleAddIngredient} disabled={isPending}>Adicionar Ingrendiente</Button>
+
             {isError && <p>Error adding ingredient</p>}
         </div>
     );

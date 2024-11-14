@@ -4,7 +4,7 @@ import DatePicker, { DateObject } from 'react-multi-date-picker';
 import { useShoppingListMutate } from '../../hooks/useShoppingListMutate';
 import { ShoppingListToSave } from '../../interface/ShoppingListToSave';
 import { useNavigate } from 'react-router-dom';
-import styles from './shoppingListIntervalBtn.module.css'; // Importando o módulo CSS
+import styles from './shoppingListIntervalBtn.module.css';
 
 interface ShoppingListIntervalBtnProps {}
 
@@ -47,7 +47,7 @@ export const ShoppingListIntervalBtn: React.FC<ShoppingListIntervalBtnProps> = (
     }, [isSuccess]);
 
     return (
-        <Container fluid className="d-flex flex-column justify-content-center align-items-center">
+        <Container  className="d-flex flex-column justify-content-center align-items-center">
             {!isContentVisible && (
                 <Button size="lg" onClick={toggleContentVisibility}>
                     Gerar Lista de Compras

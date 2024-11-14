@@ -1,0 +1,53 @@
+/* Estilos gerais para o contêiner do formulário */
+.createRecipeContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 800px;
+    /* Limite de largura para centralizar */
+    margin: 0 auto;
+    /* Centraliza o contêiner */
+    padding: 2rem;
+    background-color: #f9f9f9;
+    /* Fundo suave */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Sombra leve */
+}
+
+.container h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Floating labels */
+.createRecipeContainer .form-floating>label {
+    color: #6c757d;
+    /* Cor mais suave para o label */
+    font-size: 0.9rem;
+}
+
+.createRecipeContainer .form-floating>.form-control {
+    padding: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    /* Bordas suaves */
+}
+
+.createRecipeContainer .form-floating>.form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    /* Destaque ao focar */
+}
+
+/* Específico para o textarea */
+.createRecipeContainer textarea {
+    resize: none;
+    /* Impede redimensionamento manual */
+}
+
+/* Margem entre os elementos e o topo */
+.createRecipeContainer .mb-3 {
+    margin-bottom: 1rem;
+}

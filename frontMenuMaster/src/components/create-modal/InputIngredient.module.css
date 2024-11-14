@@ -1,0 +1,56 @@
+.ingredientListContainer {
+    width: 100%;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+
+.ingredientItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #8b8b8b;
+}
+
+.ingredientInfo {
+    display: flex;
+    align-items: center;
+}
+
+.ingredientInfo select {
+    padding: 5px;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    .ingredientsContainer li {
+        font-size: 1rem;
+    }
+}

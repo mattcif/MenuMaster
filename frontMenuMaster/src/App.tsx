@@ -12,11 +12,14 @@ import Signup from './components/authentication/Signup';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from './components/Navbar';
+import { CreateRecipe } from './pages/create-recipe/CreateRecipe';
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
   return (
     <Router>
-      <Navbar/>
+      <Navbar />
+      <Toaster/>
       <Routes>
         <Route path="/" element={<WelcomeContent />} />
         <Route path="/login" element={<Login />} />
@@ -31,6 +34,15 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/recipe/create"
+          element={
+            <ProtectedRoute>
+              <CreateRecipe/>
+            </ProtectedRoute>
+          }
+        />
+
         <Route
           path="/recipe/:id"
           element={

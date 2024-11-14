@@ -31,7 +31,7 @@ export function AddIngredient({ recipeId, onIngredientAdded }: AddIngredientProp
 
     const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newValue = Number(e.target.value);
-        if (newValue >= 1 && newValue <= 10) {
+        if (newValue >= 1) {
             setQuantity(newValue);
         }
     };

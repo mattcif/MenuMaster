@@ -105,12 +105,8 @@ export const MiniCalendar: React.FC<MiniCalendarProps> = ({ onDateSelect, recipe
         </div>
 
         <div className={styles.cardButtonsMiniCalendar}>
-          <button className={styles.saveBtn} onClick={handleSaveDateClick} disabled={isPending}>
-            {isPending ? "Salvando..." : "Salvar Data"}
-          </button>
-          <button className={styles.cancelBtn} onClick={closeCalendar}>
-            Cancelar
-          </button>
+          <Button variant='success'onClick={handleSaveDateClick} disabled={isPending} >{isPending ? "Salvando..." : "Salvar Data"} </Button>
+          <Button variant='danger' onClick={closeCalendar}>Cancelar</Button>
         </div>
       </div>
     </>

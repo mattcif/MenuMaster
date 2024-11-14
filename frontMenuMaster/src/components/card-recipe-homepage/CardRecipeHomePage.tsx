@@ -54,13 +54,14 @@ const CardRecipeHomePage: React.FC<CardRecipeProps> = ({ id, name, image }) => {
                         </Col>
 
                         <Col sm xs='auto' className={styles.cardButtons}>
-                            <Row>
+                            <Row className="d-flex">
                                 <Button
                                     variant='dark'
                                     className={`mb-2 ${styles.button} align-items-center d-flex`}
                                     onClick={handleChooseDateClick}
+                                    style={{ whiteSpace: 'nowrap', padding: 'fit-content'}}
                                 >
-                                    Choose date  <BsCalendar2Date style={{ marginLeft: '8px' }} />
+                                    Escolher Data <BsCalendar2Date style={{ marginLeft: '8px', fontSize: '1rem' }} />
                                 </Button>
                             </Row>
                             <Row>
@@ -68,7 +69,7 @@ const CardRecipeHomePage: React.FC<CardRecipeProps> = ({ id, name, image }) => {
                                     variant='info'
                                     className={styles.button}
                                     onClick={handleDetailClick}
-                                >Details</Button>
+                                >Detalhes</Button>
                             </Row>
                         </Col>
                     </Row>

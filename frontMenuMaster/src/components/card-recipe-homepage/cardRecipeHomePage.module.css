@@ -22,7 +22,12 @@
 }
 
 .button {
-    max-width: 150px ; /* Define uma largura máxima para evitar que ocupem muito espaço */
+    max-width: 80px ; /* Define uma largura máxima para evitar que ocupem muito espaço */
+}
+
+.cardButtons {
+    max-width: 130px !important ; /* Define uma largura máxima para evitar que ocupem muito espaço */
+    padding: fit-content;
 }
 
 .recipeTitle p {

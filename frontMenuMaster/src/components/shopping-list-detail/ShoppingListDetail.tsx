@@ -17,10 +17,13 @@ export function ShoppingListDetail() {
   console.log(data);
 
   return (
-    <Container className={`${styles.container} ${styles.customStyle}`}>
+    <Container className={`${styles.container} ${styles.customStyle} custom-font`}>
       <div>
-        <h1>Shopping List Detail</h1>
-        <h2>Dia de Início: {data.startDate} | Dia Final: {data.endDate}</h2>
+        <div className="d-flex flex-column justify-content-center align-items-center">
+          <h1>Lista de Compras</h1>
+          <h3>Dia de Início: {data.startDate} | Dia Final: {data.endDate}</h3>
+        </div>
+
 
         {data.recipeList.length > 0 && (
           <Carousel className={styles.fixedCarousel}>
@@ -28,7 +31,7 @@ export function ShoppingListDetail() {
               <Carousel.Item key={recipe.id}>
                 <Image src={recipe.image} alt={recipe.name} rounded style={{ width: "600px", height: "400px", objectFit: "cover" }} />
                 <Carousel.Caption>
-                  <h3>{recipe.name}</h3>
+                  <h3 className="text-black mb-4">{recipe.name}</h3>
                 </Carousel.Caption>
               </Carousel.Item>
             ))}

@@ -6,6 +6,31 @@
 
 }
 
+/* A classe do botão "Excluir" */
+.fc-event .delete-btn {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 20%;
+  padding: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  z-index: 10; /* Coloca o botão acima do evento */
+}
+
+.fc-event:hover .delete-btn {
+  display: inline-block; /* Exibe o botão ao passar o mouse sobre o evento */
+}
+
+/* Esconde o botão por padrão */
+.delete-btn {
+  display: none;
+}
+
+
 .fc {
   font-family: 'caveat';
   max-width: 100%;
@@ -18,9 +43,9 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: #FF7043;
+  background: #43caff;
   border-radius: 5px;
-  padding: 5px;
+  padding: 10px;
   white-space: nowrap;
 }
 
@@ -80,7 +105,7 @@
 /* Efeito de aumento no evento ao passar o mouse na visualização do Mês */
 .fc-dayGridMonth-view .fc-daygrid-event:hover {
   transform: scale(1.05); /* Aumenta o tamanho do evento ao passar o mouse */
-  background-color: #FF5722; /* Cor de fundo ao passar o mouse */
+  background-color: #43caff; /* Cor de fundo ao passar o mouse */
 }
 
 /* Estilos apenas para a visualização do Dia (Day View) */
@@ -101,13 +126,13 @@
 
 /* Ajuste para bordas ou cor de fundo nos eventos da visualização do Dia */
 .fc-dayGridDay-view .fc-daygrid-event {
-  background-color: #FF7043; /* Cor de fundo */
+  background-color: #43caff; /* Cor de fundo */
   color: white; /* Cor do texto */
   font-weight: bold; /* Deixa o texto em negrito */
 }
 
 /* Efeito de sombra nos eventos ao passar o mouse na visualização do Dia */
 .fc-dayGridDay-view .fc-daygrid-event:hover {
-  background-color: #FF5722; /* Cor de fundo ao passar o mouse */
+  background-color: #43caff; /* Cor de fundo ao passar o mouse */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra ao passar o mouse */
 }

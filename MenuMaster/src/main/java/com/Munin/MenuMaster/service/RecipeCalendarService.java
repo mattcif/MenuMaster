@@ -3,6 +3,7 @@ package com.Munin.MenuMaster.service;
 import com.Munin.MenuMaster.dto.requestDTO.RecipeCalendarRequestDTO;
 import com.Munin.MenuMaster.dto.responseDTO.MarketShoppingListResponseDTO;
 import com.Munin.MenuMaster.dto.responseDTO.RecipeCalendarResponseDTO;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -10,6 +11,9 @@ import java.util.UUID;
 public interface RecipeCalendarService {
 
     void createOrUpdateRecipeCalendar(RecipeCalendarRequestDTO recipeCalendarRequestDTO, String username);
+
+    @Transactional
+    boolean deleteRecipeCalendar(UUID id, String username);
 
     List<RecipeCalendarResponseDTO> getAllRecipeCalendarsForUsernmae(String username);
 

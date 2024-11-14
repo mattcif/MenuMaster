@@ -65,8 +65,17 @@ public class RecipeCalendarServiceImpl implements RecipeCalendarService {
                 recipeCalendarRepository.save(recipeCalendar);
             }
         }
+    }
 
-
+    @Override
+    @Transactional
+    public boolean deleteRecipeCalendar(UUID id, String username) {
+        RecipeCalendar recipeCalendar = recipeCalendarRepository.findById(id).orElse(null);
+        if (recipeCalendar != null) {
+            recipeCalendarRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -81,6 +90,7 @@ public class RecipeCalendarServiceImpl implements RecipeCalendarService {
                     List.of(recipeCalendar.getCalendar().getDate().toString())
             );
             dto.setQuantity(recipeCalendar.getQuantity());
+            dto.setRecipeId(recipeCalendar.getId());
             return dto;
         }).collect(Collectors.toList());
     }

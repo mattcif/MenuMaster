@@ -48,6 +48,25 @@ public class RecipeCalendarController {
         }
     }
 
+    @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ResponseEntity<String> deleteRecipeCalendar(
+            @PathVariable UUID id,
+            @AuthenticationPrincipal UserDetails userDetails) {
+        String username = userDetails.getUsername();
+        System.out.println(username);
+        try {
+            boolean deleted = recipeCalendarService.deleteRecipeCalendar(id, username);
+            if (deleted) {
+                return new ResponseEntity<>("RecipeCalendar deleted successfully", HttpStatus.NO_CONTENT);
+            } else {
+                return new ResponseEntity<>("RecipeCalendar not found or not owned by user", HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error deleting recipe calendar: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping("/shopping-list/create")
     @ResponseStatus(HttpStatus.CREATED)
     private ResponseEntity<String> createMarketShoppingList(

@@ -14,6 +14,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Navbar from './components/Navbar';
 import { CreateRecipe } from './pages/create-recipe/CreateRecipe';
 import { Toaster } from 'react-hot-toast';
+import ForgotPassword from './components/authentication/ForgotPassword';
+import ResetPassword from './components/authentication/ResetPassword';
 
 const App = () => {
   return (
@@ -24,6 +26,8 @@ const App = () => {
         <Route path="/" element={<WelcomeContent />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/forgot-password" element={<ForgotPassword/>}/>
+        <Route path='/reset-password' element={<ResetPassword/>}/>
 
 
         <Route

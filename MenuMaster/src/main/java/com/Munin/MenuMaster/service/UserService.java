@@ -15,7 +15,7 @@ public interface UserService {
 
     User findByUsername(String username);
 
-//    void generatePasswordResetToken(String email);
-//
-//    void resetPassword(String token, String newPassword);
+    void generatePasswordResetToken(String email);
+
+    void resetPassword(String token, String newPassword);
 }

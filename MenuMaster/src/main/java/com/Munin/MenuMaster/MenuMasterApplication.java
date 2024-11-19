@@ -8,7 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {
 		"com.Munin.MenuMaster.service",
 		"com.Munin.MenuMaster.controller",
-		"com.Munin.MenuMaster.security"
+		"com.Munin.MenuMaster.security",
+		"com.Munin.MenuMaster.util"
 })
 public class MenuMasterApplication {
 
